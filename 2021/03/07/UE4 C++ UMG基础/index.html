@@ -23,28 +23,32 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"machl66.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://machl66.github.io/index.html">
+<meta name="description" content="UE4 C++ UMG创建 UMG 并添加到 Viewport1.添加UMG模块Source\项目名称\项目名称.Build.cs 12PublicDependencyModuleNames.AddRange(new string[] &amp;#123; &quot;Core&quot;, &quot;CoreUObject&quot;, &quot;Engine&quot;, &quot;InputC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UE4 C++ UMG基础">
+<meta property="og:url" content="https://machl66.github.io/2021/03/07/UE4%20C++%20UMG%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="UE4 C++ UMG创建 UMG 并添加到 Viewport1.添加UMG模块Source\项目名称\项目名称.Build.cs 12PublicDependencyModuleNames.AddRange(new string[] &amp;#123; &quot;Core&quot;, &quot;CoreUObject&quot;, &quot;Engine&quot;, &quot;InputC">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-07T04:27:36.000Z">
+<meta property="article:modified_time" content="2021-03-07T10:52:09.682Z">
 <meta property="article:author" content="Machl66">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://machl66.github.io/">
+<link rel="canonical" href="https://machl66.github.io/2021/03/07/UE4%20C++%20UMG%E5%9F%BA%E7%A1%80/">
 
 
 <script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
-<title>Hexo</title>
+<title>UE4 C++ UMG基础 | Hexo</title>
   
 
 
@@ -130,7 +134,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -143,6 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UE4-C-UMG"><span class="nav-number">1.</span> <span class="nav-text">UE4 C++ UMG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-UMG-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E5%88%B0-Viewport"><span class="nav-number">1.1.</span> <span class="nav-text">创建 UMG 并添加到 Viewport</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0UMG%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1.添加UMG模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8GameMode%E4%B8%AD%E5%A3%B0%E6%98%8E-UserWidget-%E7%B1%BB"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2.在GameMode中声明 UserWidget 类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cpp%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.0.2.1.</span> <span class="nav-text">.cpp头文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9C%A8-GameMode-%E4%B8%AD%E7%9A%84BeginPlay%E4%B8%8B%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">3.在 GameMode 中的BeginPlay下创建</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -184,144 +189,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/07/UE4%20C++%20%E5%8F%98%E9%87%8F%E5%AE%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Machl66">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/07/UE4%20C++%20%E5%8F%98%E9%87%8F%E5%AE%8F/" class="post-title-link" itemprop="url">2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-03-07 18:51:20 / Modified: 18:51:29" itemprop="dateCreated datePublished" datetime="2021-03-07T18:51:20+08:00">2021-03-07</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/07/UE4%20C++%20%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Machl66">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/07/UE4%20C++%20%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88/" class="post-title-link" itemprop="url">mypost</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-03-07 18:42:37 / Modified: 18:43:32" itemprop="dateCreated datePublished" datetime="2021-03-07T18:42:37+08:00">2021-03-07</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/07/UE4%20C++%20UMG%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -334,9 +212,9 @@
       <meta itemprop="name" content="Hexo">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/07/UE4%20C++%20UMG%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">UE4 C++ UMG基础</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          UE4 C++ UMG基础
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -360,7 +238,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="UE4-C-UMG"><a href="#UE4-C-UMG" class="headerlink" title="UE4 C++ UMG"></a>UE4 C++ UMG</h1><h2 id="创建-UMG-并添加到-Viewport"><a href="#创建-UMG-并添加到-Viewport" class="headerlink" title="创建 UMG 并添加到 Viewport"></a>创建 UMG 并添加到 Viewport</h2><h4 id="1-添加UMG模块"><a href="#1-添加UMG模块" class="headerlink" title="1.添加UMG模块"></a>1.添加UMG模块</h4><p>Source\项目名称\项目名称.Build.cs</p>
+        <h1 id="UE4-C-UMG"><a href="#UE4-C-UMG" class="headerlink" title="UE4 C++ UMG"></a>UE4 C++ UMG</h1><h2 id="创建-UMG-并添加到-Viewport"><a href="#创建-UMG-并添加到-Viewport" class="headerlink" title="创建 UMG 并添加到 Viewport"></a>创建 UMG 并添加到 Viewport</h2><h4 id="1-添加UMG模块"><a href="#1-添加UMG模块" class="headerlink" title="1.添加UMG模块"></a>1.添加UMG模块</h4><p>Source\项目名称\项目名称.Build.cs</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PublicDependencyModuleNames.AddRange(new string[] &#123; &quot;Core&quot;, &quot;CoreUObject&quot;,</span><br><span class="line"> &quot;Engine&quot;, &quot;InputCore&quot;, &quot;UMG&quot; &#125;);</span><br></pre></td></tr></table></figure>
 
 <p>添加“UMG”模块。</p>
@@ -372,7 +250,6 @@
 
 
 
-      
     </div>
 
     
@@ -380,11 +257,22 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/07/UE4%20C++%20%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88/" rel="next" title="mypost">
+                  mypost <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 
