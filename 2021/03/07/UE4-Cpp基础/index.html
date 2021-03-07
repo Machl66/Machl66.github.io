@@ -23,15 +23,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"machl66.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="description" content="UE4 C++ UMG创建UMG并添加到 Viewport1.添加UMG模块Source\项目名称\项目名称.Build.cs 1PublicDependencyModuleNames.AddRange(new string[] &amp;#123; &quot;Core&quot;, &quot;CoreUObject&quot;, &quot;Engine&quot;, &quot;InputCore">
+<meta name="description" content="UE4 C++ UMG创建 UMG 并添加到 Viewport1.添加UMG模块Source\项目名称\项目名称.Build.cs 12PublicDependencyModuleNames.AddRange(new string[] &amp;#123; &quot;Core&quot;, &quot;CoreUObject&quot;, &quot;Engine&quot;, &quot;InputC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UE4_C++基础">
 <meta property="og:url" content="https://machl66.github.io/2021/03/07/UE4-Cpp%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="UE4 C++ UMG创建UMG并添加到 Viewport1.添加UMG模块Source\项目名称\项目名称.Build.cs 1PublicDependencyModuleNames.AddRange(new string[] &amp;#123; &quot;Core&quot;, &quot;CoreUObject&quot;, &quot;Engine&quot;, &quot;InputCore">
+<meta property="og:description" content="UE4 C++ UMG创建 UMG 并添加到 Viewport1.添加UMG模块Source\项目名称\项目名称.Build.cs 12PublicDependencyModuleNames.AddRange(new string[] &amp;#123; &quot;Core&quot;, &quot;CoreUObject&quot;, &quot;Engine&quot;, &quot;InputC">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-07T04:27:36.000Z">
-<meta property="article:modified_time" content="2021-03-07T10:31:13.260Z">
+<meta property="article:modified_time" content="2021-03-07T10:41:31.019Z">
 <meta property="article:author" content="Machl66">
 <meta name="twitter:card" content="summary">
 
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UE4-C-UMG"><span class="nav-number">1.</span> <span class="nav-text">UE4 C++ UMG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAUMG%E5%B9%B6%E6%B7%BB%E5%8A%A0%E5%88%B0-Viewport"><span class="nav-number">1.1.</span> <span class="nav-text">创建UMG并添加到 Viewport</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0UMG%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1.添加UMG模块</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UE4-C-UMG"><span class="nav-number">1.</span> <span class="nav-text">UE4 C++ UMG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-UMG-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E5%88%B0-Viewport"><span class="nav-number">1.1.</span> <span class="nav-text">创建 UMG 并添加到 Viewport</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0UMG%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1.添加UMG模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8GameMode%E4%B8%AD%E5%A3%B0%E6%98%8E-UserWidget-%E7%B1%BB"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2.在GameMode中声明 UserWidget 类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9C%A8-GameMode-%E4%B8%AD%E7%9A%84BeginPlay%E4%B8%8B%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">3.在 GameMode 中的BeginPlay下创建</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-03-07 12:27:36 / Modified: 18:31:13" itemprop="dateCreated datePublished" datetime="2021-03-07T12:27:36+08:00">2021-03-07</time>
+      <time title="Created: 2021-03-07 12:27:36 / Modified: 18:41:31" itemprop="dateCreated datePublished" datetime="2021-03-07T12:27:36+08:00">2021-03-07</time>
     </span>
 
   
@@ -238,10 +238,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="UE4-C-UMG"><a href="#UE4-C-UMG" class="headerlink" title="UE4 C++ UMG"></a>UE4 C++ UMG</h1><h2 id="创建UMG并添加到-Viewport"><a href="#创建UMG并添加到-Viewport" class="headerlink" title="创建UMG并添加到 Viewport"></a>创建UMG并添加到 Viewport</h2><h4 id="1-添加UMG模块"><a href="#1-添加UMG模块" class="headerlink" title="1.添加UMG模块"></a>1.添加UMG模块</h4><p>Source\项目名称\项目名称.Build.cs</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PublicDependencyModuleNames.AddRange(new string[] &#123; &quot;Core&quot;, &quot;CoreUObject&quot;, &quot;Engine&quot;, &quot;InputCore&quot;, &quot;UMG&quot; &#125;);</span><br></pre></td></tr></table></figure>
+        <h1 id="UE4-C-UMG"><a href="#UE4-C-UMG" class="headerlink" title="UE4 C++ UMG"></a>UE4 C++ UMG</h1><h2 id="创建-UMG-并添加到-Viewport"><a href="#创建-UMG-并添加到-Viewport" class="headerlink" title="创建 UMG 并添加到 Viewport"></a>创建 UMG 并添加到 Viewport</h2><h4 id="1-添加UMG模块"><a href="#1-添加UMG模块" class="headerlink" title="1.添加UMG模块"></a>1.添加UMG模块</h4><p>Source\项目名称\项目名称.Build.cs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PublicDependencyModuleNames.AddRange(new string[] &#123; &quot;Core&quot;, &quot;CoreUObject&quot;,</span><br><span class="line"> &quot;Engine&quot;, &quot;InputCore&quot;, &quot;UMG&quot; &#125;);</span><br></pre></td></tr></table></figure>
 
 <p>添加“UMG”模块。</p>
+<h4 id="2-在GameMode中声明-UserWidget-类"><a href="#2-在GameMode中声明-UserWidget-类" class="headerlink" title="2.在GameMode中声明 UserWidget 类"></a>2.在GameMode中声明 UserWidget 类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public:</span><br><span class="line">UPROPERTY(EditAnywhere,BlueprintReadWrite,Category &#x3D; &quot;UI Widgets&quot;)</span><br><span class="line">	TSubclassOf&lt;class UUserWidget&gt; MainUIClass;&#x2F;&#x2F;声明类</span><br><span class="line">&#x2F;&#x2F;在蓝图中指定MainUI类，即赋值</span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category &#x3D; &quot;UI Widgets&quot;)</span><br><span class="line">	UUserWidget* MainUI;&#x2F;&#x2F;创建一个UserWidget类变量</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-在-GameMode-中的BeginPlay下创建"><a href="#3-在-GameMode-中的BeginPlay下创建" class="headerlink" title="3.在 GameMode 中的BeginPlay下创建"></a>3.在 GameMode 中的BeginPlay下创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void ALevel1GameMode::BeginPlay()</span><br><span class="line">&#123;</span><br><span class="line">	Super::BeginPlay();&#x2F;&#x2F;该GameMode是子类，优先执行父类的BeginPlay</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	if (MainUIClass)&#x2F;&#x2F;安全性判断</span><br><span class="line">	&#123;</span><br><span class="line">		MainUI &#x3D; CreateWidget&lt;UUserWidget&gt;(UGameplayStatics::GetPlayerController(this,0),MainUIClass);</span><br><span class="line">		&#x2F;&#x2F;给MainUI赋值，值为通关MainUIClass类创建的UserWidget</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (MainUI)&#x2F;&#x2F;安全性判断</span><br><span class="line">	&#123;</span><br><span class="line">		MainUI-&gt;AddToViewport();</span><br><span class="line">		&#x2F;&#x2F;将赋值过后的MainUI添加到视口</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
