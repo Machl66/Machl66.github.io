@@ -219,7 +219,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-03-08 21:00:50 / Modified: 21:01:13" itemprop="dateCreated datePublished" datetime="2021-03-08T21:00:50+08:00">2021-03-08</time>
+      <time title="Created: 2021-03-08 21:00:50 / Modified: 21:28:00" itemprop="dateCreated datePublished" datetime="2021-03-08T21:00:50+08:00">2021-03-08</time>
     </span>
 
   
@@ -232,7 +232,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <h1 id="使用Clamp实现“夹值”"><a href="#使用Clamp实现“夹值”" class="headerlink" title="使用Clamp实现“夹值”"></a>使用Clamp实现“夹值”</h1><h2 id="不需要引入头文件-使用Fmath工具类即可调用"><a href="#不需要引入头文件-使用Fmath工具类即可调用" class="headerlink" title="不需要引入头文件 使用Fmath工具类即可调用"></a>不需要引入头文件 使用<code>Fmath</code>工具类即可调用</h2><h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Health = FMath::Clamp&lt;<span class="keyword">float</span>&gt;(Health + Value, <span class="number">0.0f</span>, MaxHealth);</span><br><span class="line"><span class="comment">//&lt;参数类型&gt; 这里以float为例</span></span><br><span class="line"><span class="comment">//第一个参数为传入的数值</span></span><br><span class="line"><span class="comment">//Health 范围0~MaxHealth</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -271,7 +271,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/08/UE4%20C++%20%E4%BC%A4%E5%AE%B3%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">1</a>
+          <a href="/2021/03/08/UE4%20C++%20%E4%BC%A4%E5%AE%B3%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">UE4 C++ 伤害系统</a>
         </h2>
 
         <div class="post-meta-container">
@@ -283,7 +283,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-03-08 20:44:13 / Modified: 20:45:32" itemprop="dateCreated datePublished" datetime="2021-03-08T20:44:13+08:00">2021-03-08</time>
+      <time title="Created: 2021-03-08 20:44:13 / Modified: 21:11:55" itemprop="dateCreated datePublished" datetime="2021-03-08T20:44:13+08:00">2021-03-08</time>
     </span>
 
   
@@ -296,7 +296,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <h1 id="UE4-C-伤害系统使用"><a href="#UE4-C-伤害系统使用" class="headerlink" title="UE4 C++ 伤害系统使用"></a>UE4 C++ 伤害系统使用</h1>
       
     </div>
 
@@ -347,7 +347,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-03-08 20:04:40 / Modified: 20:49:42" itemprop="dateCreated datePublished" datetime="2021-03-08T20:04:40+08:00">2021-03-08</time>
+      <time title="Created: 2021-03-08 20:04:40 / Modified: 21:11:55" itemprop="dateCreated datePublished" datetime="2021-03-08T20:04:40+08:00">2021-03-08</time>
     </span>
 
   
@@ -367,7 +367,7 @@
 <h3 id="在-h文件中声明用来绑定该-ActionEvent-的方法"><a href="#在-h文件中声明用来绑定该-ActionEvent-的方法" class="headerlink" title="在.h文件中声明用来绑定该 ActionEvent 的方法"></a>在.h文件中声明用来绑定该 ActionEvent 的方法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//例子中的.h文件为继承自ACharacter类的子类</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Jump</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"><span class="comment">//重写ACharacter类里面的Jump方法</span></span><br><span class="line">   <span class="comment">//通常如果需要用到动作映射和轴映射，习惯将动作映射方法声明和绑定写在轴映射上方</span></span><br><span class="line"></span><br><span class="line">   UFUNCTION(BlueprintCallable, Category=Character)</span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">StopJumping</span><span class="params">()</span></span>;<span class="comment">//StopJumping方法不重写 该段代码取自Character.h源码</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="在-h文件中写一个方法用来写绑定的语句"><a href="#在-h文件中写一个方法用来写绑定的语句" class="headerlink" title="在.h文件中写一个方法用来写绑定的语句"></a>在.h文件中写一个方法用来写绑定的语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Called to bind functionality to input</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">SetupPlayerInputComponent</span><span class="params">(class UInputComponent* PlayerInputComponent)</span> <span class="keyword">override</span></span>;<span class="comment">//ACharacter类自带该方法</span></span><br></pre></td></tr></table></figure>
-<h3 id="在-cpp文件中写绑定语句"><a href="#在-cpp文件中写绑定语句" class="headerlink" title="在.cpp文件中写绑定语句"></a>在.cpp文件中写绑定语句</h3><p>需要引入头文件才可以调用PlayerInputComponent</p>
+<h3 id="在-cpp文件中写绑定语句"><a href="#在-cpp文件中写绑定语句" class="headerlink" title="在.cpp文件中写绑定语句"></a>在.cpp文件中写绑定语句</h3><p>需要引入头文件才可以调用 <code>PlayerInputComponent</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;Components&#x2F;InputComponent.h&quot;</span><br></pre></td></tr></table></figure>
 <p>写在上面声明的方法中</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::SetupPlayerInputComponent</span><span class="params">(UInputComponent* PlayerInputComponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Pressed, <span class="keyword">this</span>, &amp;AMainPlayer::Jump);   </span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Released, <span class="keyword">this</span>, &amp;ACharacter::StopJumping);</span><br><span class="line">    <span class="comment">//(ProjecSettings中的动作事件名，按下或者松开，绑定到哪个类，用取地址符获得绑定到哪个方法上)</span></span><br><span class="line">    <span class="comment">//即按下SpaceBar，触发Jump事件，Jump事件会触发绑定的AMainPlayer中的Jump事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -501,7 +501,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-08 21:00:41" itemprop="dateModified" datetime="2021-03-08T21:00:41+08:00">2021-03-08</time>
+        <time title="Modified: 2021-03-08 21:20:35" itemprop="dateModified" datetime="2021-03-08T21:20:35+08:00">2021-03-08</time>
       </span>
 
   
@@ -514,10 +514,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="在C-中创建粒子系统的变量和组件"><a href="#在C-中创建粒子系统的变量和组件" class="headerlink" title="在C++中创建粒子系统的变量和组件"></a>在C++中创建粒子系统的变量和组件</h1><h3 id="创建粒子特效变量"><a href="#创建粒子特效变量" class="headerlink" title="创建粒子特效变量"></a>创建粒子特效变量</h3><p>在.h文件中</p>
+          <h1 id="在C-中创建粒子系统的变量和组件"><a href="#在C-中创建粒子系统的变量和组件" class="headerlink" title="在C++中创建粒子系统的变量和组件"></a>在C++中创建粒子系统的变量和组件</h1><h2 id="创建粒子特效变量"><a href="#创建粒子特效变量" class="headerlink" title="创建粒子特效变量"></a>创建粒子特效变量</h2><p>在.h文件中</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Interactable Item|Particles&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UParticleSystem</span>* <span class="title">OverlapParticle</span>;</span></span><br><span class="line">   <span class="comment">//创建一个粒子特效变量 OverlapParticle</span></span><br><span class="line">   <span class="comment">//可在蓝图中赋值（初始化）</span></span><br></pre></td></tr></table></figure>
 <h3 id="在-cpp中-通过-UGamePlayStatics-类中的方法来生成粒子特效"><a href="#在-cpp中-通过-UGamePlayStatics-类中的方法来生成粒子特效" class="headerlink" title="在.cpp中 通过 UGamePlayStatics 类中的方法来生成粒子特效"></a>在.cpp中 通过 <code>UGamePlayStatics</code> 类中的方法来生成粒子特效</h3><h4 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h4><p><code>#include &quot;Kismet/GameplayStatics.h&quot;</code> </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (OverlapParticle)<span class="comment">//安全性判断 防止没有给变量赋值</span></span><br><span class="line">&#123;</span><br><span class="line">	UGameplayStatics::SpawnEmitterAtLocation(<span class="keyword">this</span>,OverlapParticle,GetActorLocation(),FRotator(<span class="number">0.0f</span>),<span class="literal">true</span>);</span><br><span class="line">	<span class="comment">//生成粒子特效 需引入Kismet/GameplayStatics.h 才能使用UGamePlayStatic类</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建粒子特效组件"><a href="#创建粒子特效组件" class="headerlink" title="创建粒子特效组件"></a>创建粒子特效组件</h2> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(VisibleAnyWhere, BlueprintReadWrite, Category = <span class="string">&quot;Interactable Item|Particles&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UParticleSystemComponent</span>* <span class="title">IdlePracticleComponent</span>;</span></span><br><span class="line">   <span class="comment">//Component组件会在编辑器面板中以组件的形式存在</span></span><br><span class="line">   <span class="comment">//不同于上方的变量，变量是该类本身的一个属性值，可对其赋值并调用</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="在-cpp构造函数中创建该组件"><a href="#在-cpp构造函数中创建该组件" class="headerlink" title="在.cpp构造函数中创建该组件"></a>在.cpp构造函数中创建该组件</h2><p>需要引入头文件<br><code>#include &quot;Particles/ParticleSystemComponent.h&quot;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IdlePracticleComponent = CreateDefaultSubobject&lt;UParticleSystemComponent&gt;(TEXT(<span class="string">&quot;IdleParticleComponent&quot;</span>));</span><br><span class="line">IdlePracticleComponent-&gt;SetupAttachment(GetRootComponent());</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -574,7 +580,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-08 20:15:36" itemprop="dateModified" datetime="2021-03-08T20:15:36+08:00">2021-03-08</time>
+        <time title="Modified: 2021-03-08 21:20:45" itemprop="dateModified" datetime="2021-03-08T21:20:45+08:00">2021-03-08</time>
       </span>
 
   
@@ -588,14 +594,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="UE4-C-UMG"><a href="#UE4-C-UMG" class="headerlink" title="UE4 C++ UMG"></a>UE4 C++ UMG</h1><h2 id="创建-UMG-并添加到-Viewport"><a href="#创建-UMG-并添加到-Viewport" class="headerlink" title="创建 UMG 并添加到 Viewport"></a>创建 UMG 并添加到 Viewport</h2><h4 id="1-添加UMG模块"><a href="#1-添加UMG模块" class="headerlink" title="1.添加UMG模块"></a>1.添加UMG模块</h4><p>Source\项目名称\项目名称.Build.cs</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PublicDependencyModuleNames.AddRange(new string[] &#123; &quot;Core&quot;, &quot;CoreUObject&quot;,</span><br><span class="line"> &quot;Engine&quot;, &quot;InputCore&quot;, &quot;UMG&quot; &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PublicDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;Core&quot;</span>, <span class="string">&quot;CoreUObject&quot;</span>,</span><br><span class="line"> <span class="string">&quot;Engine&quot;</span>, <span class="string">&quot;InputCore&quot;</span>, <span class="string">&quot;UMG&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
 
 <p>添加“UMG”模块。</p>
-<h4 id="2-在GameMode中声明-UserWidget-类"><a href="#2-在GameMode中声明-UserWidget-类" class="headerlink" title="2.在GameMode中声明 UserWidget 类"></a>2.在GameMode中声明 UserWidget 类</h4><h5 id="cpp头文件"><a href="#cpp头文件" class="headerlink" title=".cpp头文件"></a>.cpp头文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;Blueprint&#x2F;UserWidget.h&quot;</span><br><span class="line">#include &quot;Kismet&#x2F;GameplayStatics.h&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="2-在GameMode中声明-UserWidget-类"><a href="#2-在GameMode中声明-UserWidget-类" class="headerlink" title="2.在GameMode中声明 UserWidget 类"></a>2.在GameMode中声明 UserWidget 类</h4><h5 id="cpp头文件"><a href="#cpp头文件" class="headerlink" title=".cpp头文件"></a>.cpp头文件</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Blueprint/UserWidget.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Kismet/GameplayStatics.h&quot;</span></span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public:</span><br><span class="line">UPROPERTY(EditAnywhere,BlueprintReadWrite,Category &#x3D; &quot;UI Widgets&quot;)</span><br><span class="line">	TSubclassOf&lt;class UUserWidget&gt; MainUIClass;&#x2F;&#x2F;声明类</span><br><span class="line">&#x2F;&#x2F;在蓝图中指定MainUI类，即赋值</span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category &#x3D; &quot;UI Widgets&quot;)</span><br><span class="line">	UUserWidget* MainUI;&#x2F;&#x2F;创建一个UserWidget类变量</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = <span class="string">&quot;UI Widgets&quot;</span>)</span><br><span class="line">	TSubclassOf&lt;<span class="class"><span class="keyword">class</span> <span class="title">UUserWidget</span>&gt;</span> MainUIClass;<span class="comment">//声明类</span></span><br><span class="line"><span class="comment">//在蓝图中指定MainUI类，即赋值</span></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;UI Widgets&quot;</span>)</span><br><span class="line">	UUserWidget* MainUI;<span class="comment">//创建一个UserWidget类变量</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="3-在-GameMode-中的BeginPlay下创建"><a href="#3-在-GameMode-中的BeginPlay下创建" class="headerlink" title="3.在 GameMode 中的BeginPlay下创建"></a>3.在 GameMode 中的BeginPlay下创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void ALevel1GameMode::BeginPlay()</span><br><span class="line">&#123;</span><br><span class="line">	Super::BeginPlay();&#x2F;&#x2F;该GameMode是子类，优先执行父类的BeginPlay</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	if (MainUIClass)&#x2F;&#x2F;安全性判断</span><br><span class="line">	&#123;</span><br><span class="line">		MainUI &#x3D; CreateWidget&lt;UUserWidget&gt;(UGameplayStatics::GetPlayerController(this,0),MainUIClass);</span><br><span class="line">		&#x2F;&#x2F;给MainUI赋值，值为通过MainUIClass类创建的UserWidget</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (MainUI)&#x2F;&#x2F;安全性判断</span><br><span class="line">	&#123;</span><br><span class="line">		MainUI-&gt;AddToViewport();</span><br><span class="line">		&#x2F;&#x2F;将赋值过后的MainUI添加到视口</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-在-GameMode-中的BeginPlay下创建"><a href="#3-在-GameMode-中的BeginPlay下创建" class="headerlink" title="3.在 GameMode 中的BeginPlay下创建"></a>3.在 GameMode 中的BeginPlay下创建</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ALevel1GameMode::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::BeginPlay();<span class="comment">//该GameMode是子类，优先执行父类的BeginPlay</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (MainUIClass)<span class="comment">//安全性判断</span></span><br><span class="line">	&#123;</span><br><span class="line">		MainUI = CreateWidget&lt;UUserWidget&gt;(UGameplayStatics::GetPlayerController(<span class="keyword">this</span>,<span class="number">0</span>),MainUIClass);</span><br><span class="line">		<span class="comment">//给MainUI赋值，值为通过MainUIClass类创建的UserWidget</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (MainUI)<span class="comment">//安全性判断</span></span><br><span class="line">	&#123;</span><br><span class="line">		MainUI-&gt;AddToViewport();</span><br><span class="line">		<span class="comment">//将赋值过后的MainUI添加到视口</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
