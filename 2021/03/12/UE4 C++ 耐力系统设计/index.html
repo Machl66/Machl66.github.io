@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"machl66.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="C++ 耐力系统设计简述耐力系统1.供玩家奔跑跳跃等    玩家可通过LShift键进行加速奔跑行为。     玩家进行一些特殊运动状态时，也可以消耗耐力。  2.耐力条设计    在UMG中，通过ProgressBar简单设计耐力条UI  3.耐力条分配    应当设计不同耐力状态，例如普通状态，筋疲力竭状态，可按7&#x2F;3，8&#x2F;2分配。     玩家处于筋疲力竭状态时不可以再进行加速。     但">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UE4 C++ 耐力系统设计">
+<meta property="og:url" content="https://machl66.github.io/2021/03/12/UE4%20C++%20%E8%80%90%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Machl">
+<meta property="og:description" content="C++ 耐力系统设计简述耐力系统1.供玩家奔跑跳跃等    玩家可通过LShift键进行加速奔跑行为。     玩家进行一些特殊运动状态时，也可以消耗耐力。  2.耐力条设计    在UMG中，通过ProgressBar简单设计耐力条UI  3.耐力条分配    应当设计不同耐力状态，例如普通状态，筋疲力竭状态，可按7&#x2F;3，8&#x2F;2分配。     玩家处于筋疲力竭状态时不可以再进行加速。     但">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-12T07:51:48.000Z">
+<meta property="article:modified_time" content="2021-03-12T09:09:23.976Z">
+<meta property="article:author" content="Machl">
+<meta property="article:tag" content="GamePlay基础">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://machl66.github.io/2021/03/12/UE4%20C++%20%E8%80%90%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>UE4 C++ 耐力系统设计 | Machl</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Machl</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E8%80%90%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">C++ 耐力系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E8%80%90%E5%8A%9B%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">简述耐力系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BE%9B%E7%8E%A9%E5%AE%B6%E5%A5%94%E8%B7%91%E8%B7%B3%E8%B7%83%E7%AD%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.供玩家奔跑跳跃等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%80%90%E5%8A%9B%E6%9D%A1%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.耐力条设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%80%90%E5%8A%9B%E6%9D%A1%E5%88%86%E9%85%8D"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.耐力条分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.程序设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-UMG%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.UMG设计</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Machl</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/12/UE4%20C++%20%E8%80%90%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UE4 C++ 耐力系统设计
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-12 15:51:48 / Modified: 17:09:23" itemprop="dateCreated datePublished" datetime="2021-03-12T15:51:48+08:00">2021-03-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="C-耐力系统设计"><a href="#C-耐力系统设计" class="headerlink" title="C++ 耐力系统设计"></a>C++ 耐力系统设计</h1><h2 id="简述耐力系统"><a href="#简述耐力系统" class="headerlink" title="简述耐力系统"></a>简述耐力系统</h2><h3 id="1-供玩家奔跑跳跃等"><a href="#1-供玩家奔跑跳跃等" class="headerlink" title="1.供玩家奔跑跳跃等"></a>1.供玩家奔跑跳跃等</h3><pre><code>    玩家可通过LShift键进行加速奔跑行为。
+    玩家进行一些特殊运动状态时，也可以消耗耐力。
+</code></pre>
+<h3 id="2-耐力条设计"><a href="#2-耐力条设计" class="headerlink" title="2.耐力条设计"></a>2.耐力条设计</h3><pre><code>    在UMG中，通过ProgressBar简单设计耐力条UI
+</code></pre>
+<h3 id="3-耐力条分配"><a href="#3-耐力条分配" class="headerlink" title="3.耐力条分配"></a>3.耐力条分配</h3><pre><code>    应当设计不同耐力状态，例如普通状态，筋疲力竭状态，可按7/3，8/2分配。
+    玩家处于筋疲力竭状态时不可以再进行加速。
+    但玩家可从普通状态一直加速到耐力条变空
+</code></pre>
+<h3 id="4-程序设计"><a href="#4-程序设计" class="headerlink" title="4.程序设计"></a>4.程序设计</h3><p><code>通过定义枚举类记录状态</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">UENUM(BlueprintType)</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">EPlayerMovementStatus</span> :</span> uint8<span class="comment">//该枚举使用uint8 位</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//拿该类的每个单词首字母作为前缀，后缀跟上状态名</span></span><br><span class="line">    EPMS_Normal UMETA(DisplayName=&quot;Normal&quot;),//在编辑器中使用DisplayName </span><br><span class="line">    EPMS_Sprinting UMETA(DisplayName = &quot;Sprinting&quot;),</span><br><span class="line">    <span class="function">EPMS_Dead <span class="title">UMETA</span><span class="params">(DisplayName = <span class="string">&quot;Deadd&quot;</span>)</span></span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//记录玩家运动状态 普通，加速，或者死亡</span></span><br><span class="line">UENUM(BlueprintType)</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">EPlayerStaminaStatus</span> :</span> uint8</span><br><span class="line">&#123;</span><br><span class="line">    EPSS_Normal UMETA(DisplayName = &quot;Normal&quot;),</span><br><span class="line">    EPSS_Exhuasted UMETA(DisplayName = &quot;Exhuasted&quot;),</span><br><span class="line">    <span class="function">EPSS_ExhaustedRecovering  <span class="title">UMETA</span><span class="params">(DisplayName = <span class="string">&quot;ExhaustedRecovering&quot;</span>)</span></span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//记录玩家耐力状态 普通，筋疲力竭，筋疲力竭正在恢复</span></span><br></pre></td></tr></table></figure>
+<p><code>变量定义</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(VisibleAnywhere,BlueprintReadWrite, Category = <span class="string">&quot;Player Stats&quot;</span>)</span><br><span class="line">EPlayerStaminaStatus PlayerStaminaStatus;<span class="comment">//创建玩家耐力状态枚举变量</span></span><br><span class="line"></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Player Stats&quot;</span>)</span><br><span class="line">EPlayerMovementStatus PlayerMovementStatus;<span class="comment">//创建玩家运动状态枚举变量</span></span><br><span class="line"></span><br><span class="line">      UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Player Stats&quot;</span>)</span><br><span class="line"><span class="keyword">float</span> CurrentStamina;<span class="comment">//当前耐力值，UI中每帧获取当前耐力绑定耐力条</span></span><br><span class="line"></span><br><span class="line">      UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Player Stats&quot;</span>)</span><br><span class="line"><span class="keyword">float</span> SprintingSpeed;<span class="comment">//加速状态下的Speed</span></span><br><span class="line"></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Player Stats&quot;</span>)</span><br><span class="line"><span class="keyword">float</span> RunningSpeed;<span class="comment">//正常奔跑状态下的Speed</span></span><br><span class="line"></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Player Stats&quot;</span>)</span><br><span class="line"><span class="keyword">float</span> WalkSpeed;<span class="comment">//行走速度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> bLeftShiftKeyDown;<span class="comment">//是否按下左Shift键</span></span><br></pre></td></tr></table></figure>
+<p><code>函数定义</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FORCEINLINE <span class="keyword">void</span> <span class="title">LeftShiftKeyDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	bLeftShiftKeyDown = <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">FORCEINLINE <span class="keyword">void</span> <span class="title">LeftShiftKeyUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	bLeftShiftKeyDown = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">   <span class="comment">//自定义按下抬起函数，防止耐力耗完后玩家依旧按住Shift，程序层面添加debug</span></span><br><span class="line"></span><br><span class="line">UFUNCTION(BlueprintCallable)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">IncreateStamina</span><span class="params">(<span class="keyword">float</span> Value)</span></span>;<span class="comment">//增加耐力 喝蓝药的时候可以调用</span></span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">SetMovementStatus</span><span class="params">(EPlayerMovementStatus Status)</span></span>;</span><br><span class="line">   <span class="comment">//玩家在不同的运动状态时，设置不同的运动速度</span></span><br></pre></td></tr></table></figure>
+<p><code>变量初始化</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">MaxStamina = <span class="number">150.0f</span>;</span><br><span class="line">CurrentStamina = MaxStamina;</span><br><span class="line">StaminaConsumeRate = <span class="number">20.0f</span>;</span><br><span class="line">StaminaRecoveraRate = <span class="number">15.0f</span>;</span><br><span class="line">ExhaustedStaminaRatio = <span class="number">0.167f</span>;</span><br><span class="line">   <span class="comment">//剩下1/6耐力时筋疲力竭</span></span><br><span class="line">PlayerStaminaStatus = EPlayerStaminaStatus::EPSS_Normal;</span><br><span class="line">   <span class="comment">//初始耐力状态</span></span><br><span class="line">PlayerMovementStatus = EPlayerMovementStatus::EPMS_Normal;</span><br><span class="line">   <span class="comment">//初始人物运动状态</span></span><br><span class="line">bLeftShiftKeyDown = <span class="literal">false</span>;</span><br><span class="line">   <span class="comment">//初始按键按下状态</span></span><br><span class="line">SprintingSpeed = <span class="number">900.0f</span>;</span><br><span class="line">RunningSpeed = <span class="number">600.0f</span>;</span><br><span class="line">WalkSpeed = <span class="number">100.0f</span>;</span><br><span class="line">   <span class="comment">//不同状态下人物运动速度设计</span></span><br></pre></td></tr></table></figure>
+<p><code>设置人物运动状态（速度）</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::SetMovementStatus</span><span class="params">(EPlayerMovementStatus Status)</span></span></span><br><span class="line"><span class="function"><span class="comment">//设置不同状态下人物速度s</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PlayerMovementStatus = Status;</span><br><span class="line">    <span class="comment">//给全局变量：人物运动状态赋值</span></span><br><span class="line">    <span class="keyword">switch</span> (PlayerMovementStatus)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> EPlayerMovementStatus::EPMS_Sprinting:</span><br><span class="line">        GetCharacterMovement()-&gt;MaxWalkSpeed = SprintingSpeed;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        GetCharacterMovement()-&gt;MaxWalkSpeed = RunningSpeed;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;`</span><br></pre></td></tr></table></figure>
+
+
+<p><code>在Event Tick下检测耐力状态</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (PlayerStaminaStatus)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">case</span> EPlayerStaminaStatus::EPSS_Normal:<span class="comment">//耐力条处于正常区时</span></span><br><span class="line">			<span class="keyword">if</span> (bLeftShiftKeyDown)<span class="comment">//此时按下左Shift</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (CurrentStamina-StaminaConsumeRate*DeltaTime &lt;= MaxStamina * ExhaustedStaminaRatio)</span><br><span class="line">					<span class="comment">//判定：下一帧，耐力是否位于筋疲力竭区</span></span><br><span class="line">				&#123;</span><br><span class="line">					PlayerStaminaStatus = EPlayerStaminaStatus::EPSS_Exhuasted;</span><br><span class="line">					<span class="comment">//耐力已经精疲力竭</span></span><br><span class="line">				&#125;</span><br><span class="line">				CurrentStamina -= StaminaConsumeRate * DeltaTime;</span><br><span class="line">                <span class="comment">//耐力 以 Rate 速率为基准减少</span></span><br><span class="line">				SetMovementStatus(EPlayerMovementStatus::EPMS_Sprinting);</span><br><span class="line">                <span class="comment">//将速度设为冲刺速度</span></span><br><span class="line">				<span class="comment">//耐力尚未筋疲力竭</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span><span class="comment">//耐力条处于正常区 且 没有按下LShift 此时耐力缓慢恢复  </span></span><br><span class="line">			&#123;	</span><br><span class="line">				CurrentStamina = FMath::Clamp(CurrentStamina + StaminaRecoveraRate * DeltaTime, <span class="number">0.0f</span>, MaxStamina);</span><br><span class="line">				SetMovementStatus(EPlayerMovementStatus::EPMS_Normal);</span><br><span class="line">                <span class="comment">//将速度设为正常速度</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> EPlayerStaminaStatus::EPSS_Exhuasted:</span><br><span class="line">			<span class="keyword">if</span> (bLeftShiftKeyDown)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (CurrentStamina - StaminaConsumeRate * DeltaTime &lt;= <span class="number">0.0f</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					LeftShiftKeyUp();<span class="comment">//程序上将玩家的加速键抬起</span></span><br><span class="line">					PlayerStaminaStatus = EPlayerStaminaStatus::EPSS_ExhaustedRecovering;</span><br><span class="line">                    <span class="comment">//将耐力状态设置为 筋疲力竭需要恢复得状态</span></span><br><span class="line">					SetMovementStatus(EPlayerMovementStatus::EPMS_Normal);</span><br><span class="line">                    <span class="comment">//加速状态取消，玩家移动状态改为普通</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					CurrentStamina -= StaminaConsumeRate * DeltaTime;</span><br><span class="line">                    <span class="comment">//耐力位于筋疲力竭区但是仍然可以继续加速，此时继续减少Stamina</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span><span class="comment">//耐力处于筋疲力竭区但是没有再按下LShift</span></span><br><span class="line">			&#123;</span><br><span class="line">				PlayerStaminaStatus = EPlayerStaminaStatus::EPSS_ExhaustedRecovering;</span><br><span class="line">                <span class="comment">//此时耐力状态为筋疲力竭恢复状态</span></span><br><span class="line">				CurrentStamina = FMath::Clamp(CurrentStamina + StaminaRecoveraRate * DeltaTime, <span class="number">0.0f</span>, MaxStamina*ExhaustedStaminaRatio);<span class="comment">//耐力缓慢增加</span></span><br><span class="line">				SetMovementStatus(EPlayerMovementStatus::EPMS_Normal);</span><br><span class="line">                <span class="comment">//移动状态改为Normal，加速状态取消</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> EPlayerStaminaStatus::EPSS_ExhaustedRecovering:</span><br><span class="line">			<span class="keyword">if</span> (CurrentStamina + StaminaConsumeRate * DeltaTime &gt;= MaxStamina * ExhaustedStaminaRatio)<span class="comment">//如果下一帧耐力超过了筋疲力竭区</span></span><br><span class="line">			&#123;</span><br><span class="line">				PlayerStaminaStatus = EPlayerStaminaStatus::EPSS_Normal;<span class="comment">//耐力状态变为普通</span></span><br><span class="line">			&#125;</span><br><span class="line">			CurrentStamina += StaminaRecoveraRate * DeltaTime;</span><br><span class="line">            <span class="comment">//如果耐力处于筋疲力竭区并且未达到临界值，耐力每帧增加</span></span><br><span class="line">			LeftShiftKeyUp();</span><br><span class="line">			SetMovementStatus(EPlayerMovementStatus::EPMS_Normal);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-UMG设计"><a href="#5-UMG设计" class="headerlink" title="5.UMG设计"></a>5.UMG设计</h3><pre><code>1.绑定ProgressBar，每帧获得CurrentStamina，与MaxStamina计算获得当前耐力值比例。实时更新ProfressBar。
+2.耐力筋疲力竭时，耐力条颜色变为橘红色。可绑定ProgeressBar下的Apperance，检测到playerStaminaStatu为Exhauste时，变为红色。
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GamePlay%E5%9F%BA%E7%A1%80/" rel="tag"># GamePlay基础</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/08/UE4%20C++%E4%BD%BF%E7%94%A8%20Clamp/" rel="prev" title="UE4 C++使用 Clamp">
+                  <i class="fa fa-chevron-left"></i> UE4 C++使用 Clamp
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Machl</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
