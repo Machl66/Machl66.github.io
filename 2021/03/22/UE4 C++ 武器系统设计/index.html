@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"machl66.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="C++ 可拾取武器类设计通过枚举创建武器的多种状态1234567UENUM(BlueprintType)&#x2F;&#x2F;可在蓝图中调用enum class EWeaponState :uint8&amp;#123;	EWS_CanPickUp UMETA(DisplayName &#x3D; &quot;CanPickUp&quot;),	EWS_Equipped UMETA(DisplayName &#x3D; &quot;Equip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UE4 C++ 武器系统设计">
+<meta property="og:url" content="https://machl66.github.io/2021/03/22/UE4%20C++%20%E6%AD%A6%E5%99%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Machl">
+<meta property="og:description" content="C++ 可拾取武器类设计通过枚举创建武器的多种状态1234567UENUM(BlueprintType)&#x2F;&#x2F;可在蓝图中调用enum class EWeaponState :uint8&amp;#123;	EWS_CanPickUp UMETA(DisplayName &#x3D; &quot;CanPickUp&quot;),	EWS_Equipped UMETA(DisplayName &#x3D; &quot;Equip">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-22T05:01:03.000Z">
+<meta property="article:modified_time" content="2021-03-22T05:31:59.140Z">
+<meta property="article:author" content="Machl">
+<meta property="article:tag" content="GamePlay基础">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://machl66.github.io/2021/03/22/UE4%20C++%20%E6%AD%A6%E5%99%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>UE4 C++ 武器系统设计 | Machl</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Machl</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E5%8F%AF%E6%8B%BE%E5%8F%96%E6%AD%A6%E5%99%A8%E7%B1%BB%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">C++ 可拾取武器类设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%9E%9A%E4%B8%BE%E5%88%9B%E5%BB%BA%E6%AD%A6%E5%99%A8%E7%9A%84%E5%A4%9A%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">1.1.</span> <span class="nav-text">通过枚举创建武器的多种状态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A6%E5%99%A8%E7%B1%BB%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">武器类设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Player%E4%B8%AD%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">Player中配合使用的代码段</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Machl</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/22/UE4%20C++%20%E6%AD%A6%E5%99%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UE4 C++ 武器系统设计
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-22 13:01:03 / Modified: 13:31:59" itemprop="dateCreated datePublished" datetime="2021-03-22T13:01:03+08:00">2021-03-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="C-可拾取武器类设计"><a href="#C-可拾取武器类设计" class="headerlink" title="C++ 可拾取武器类设计"></a>C++ 可拾取武器类设计</h1><h2 id="通过枚举创建武器的多种状态"><a href="#通过枚举创建武器的多种状态" class="headerlink" title="通过枚举创建武器的多种状态"></a>通过枚举创建武器的多种状态</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UENUM(BlueprintType)<span class="comment">//可在蓝图中调用</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">EWeaponState</span> :</span>uint8</span><br><span class="line">&#123;</span><br><span class="line">	EWS_CanPickUp UMETA(DisplayName = &quot;CanPickUp&quot;),</span><br><span class="line">	EWS_Equipped UMETA(DisplayName = &quot;Equipped&quot;),</span><br><span class="line">    <span class="comment">//武器状态包括可拾取，已被玩家拾取并装备</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="武器类设计"><a href="#武器类设计" class="headerlink" title="武器类设计"></a>武器类设计</h1><p><code>.h文件</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;CoreMinimal.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;GamePlay/InteractableItem.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;WeaponItem.generated.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">UENUM(BlueprintType)</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">EWeaponState</span> :</span>uint8</span><br><span class="line">&#123;</span><br><span class="line">	EWS_CanPickUp UMETA(DisplayName = &quot;CanPickUp&quot;),</span><br><span class="line">	EWS_Equipped UMETA(DisplayName = &quot;Equipped&quot;),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">UCLASS()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GETSTARTED_API</span> <span class="title">AWeaponItem</span> :</span> <span class="keyword">public</span> AInteractableItem</span><br><span class="line"><span class="comment">//父类为AInteractableItem</span></span><br><span class="line">&#123;</span><br><span class="line">	GENERATED_BODY()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	AWeaponItem();<span class="comment">//构造函数 该类的构造函数需自己声明，基类不提供构造函数</span></span><br><span class="line"></span><br><span class="line">	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Weapon|Sound&quot;</span>)</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">USoundCue</span>* <span class="title">OnEquipSound</span>;</span></span><br><span class="line">	</span><br><span class="line">	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = <span class="string">&quot;Weapon|Particle&quot;</span>)</span><br><span class="line">	<span class="keyword">bool</span> bShouldReserveIdlePartle;</span><br><span class="line">    <span class="comment">//是否保留 未被拾取时武器的粒子效果，该粒子效果源自父类 AInteractableItem</span></span><br><span class="line">    <span class="comment">//玩家拾取过后即不保留粒子特效</span></span><br><span class="line">	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Weapon&quot;</span>)</span><br><span class="line">	EWeaponState WeaponState;</span><br><span class="line">    <span class="comment">//创建枚举类变量 WeaponState</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">BeginPlay</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Tick</span><span class="params">(<span class="keyword">float</span> DeltaTime)</span> <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="comment">//重写父类Tick</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnOverlapBegin</span><span class="params">(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, <span class="keyword">bool</span> bFromSweep, <span class="keyword">const</span> FHitResult&amp; SweepResult)</span> <span class="keyword">override</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnOverlapEnd</span><span class="params">(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)</span> <span class="keyword">override</span></span>;	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Equip</span><span class="params">(class AMainPlayer *MainPlayer)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">UnEquip</span><span class="params">(class AMainPlayer* MainPlayer)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ActiveDisplayMeshCollision</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">//开启武器Mesh的碰撞</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">DeActiveDisplayMeshCollision</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">//关闭武器Mesh的碰撞</span></span><br><span class="line">    <span class="comment">//当玩家装备武器后，如果碰撞仍然存在会影响玩家运动</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>.Cpp文件</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;WeaponItem.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Components/SkeletalMeshComponent.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Components/SphereComponent.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Characters/player/MainPlayer.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Engine/SkeletalMeshSocket.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Sound/SoundCue.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Kismet/GameplayStatics.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Particles/ParticleSystemComponent.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;UObject/ConstructorHelpers.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;GameFramework/CharacterMovementComponent.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">AWeaponItem::AWeaponItem()<span class="comment">//构造函数 维护变量</span></span><br><span class="line">&#123;</span><br><span class="line">    TriggerVolume-&gt;SetSphereRadius(<span class="number">64.0f</span>);</span><br><span class="line">    DisplayMesh-&gt;DestroyComponent();</span><br><span class="line">    DisplayMesh = CreateDefaultSubobject&lt;USkeletalMeshComponent&gt;(TEXT(<span class="string">&quot;DisplaySkeletalMesh&quot;</span>));</span><br><span class="line">    DisplayMesh-&gt;SetupAttachment(GetRootComponent());</span><br><span class="line">    bShouldReserveIdlePartle = <span class="literal">false</span>;<span class="comment">//拾起后不保留IdleParticle</span></span><br><span class="line">    WeaponState = EWeaponState::EWS_CanPickUp;<span class="comment">//武器初始状态都为可拾取</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> ConstructorHelpers::FObjectFinder&lt;USoundCue&gt; <span class="title">SoundCueAsset</span><span class="params">(TEXT(<span class="string">&quot;SoundCue&#x27;/Game/Assets/Audios/Blade_Cue.Blade_Cue&#x27;&quot;</span>))</span></span>;</span><br><span class="line">    <span class="comment">//获取资源引用，可通过编辑器右键该SoundCue，GetReference 获得该资源引用</span></span><br><span class="line">    <span class="keyword">if</span> (SoundCueAsset.Succeeded())</span><br><span class="line">    &#123;</span><br><span class="line">        OnEquipSound = SoundCueAsset.Object;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//赋值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AWeaponItem::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Super::BeginPlay();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> AWeaponItem :: Tick(<span class="keyword">float</span> DeltaTime)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*UE_LOG(LogTemp, Warning, TEXT(&quot;Overlap&quot;));*/</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AWeaponItem::OnOverlapBegin</span><span class="params">(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, <span class="keyword">bool</span> bFromSweep, <span class="keyword">const</span> FHitResult&amp; SweepResult)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Super::OnOverlapBegin(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);</span><br><span class="line">    <span class="keyword">if</span> (OtherActor &amp;&amp; WeaponState==EWeaponState::EWS_CanPickUp)</span><br><span class="line">        <span class="comment">//碰撞的Actor有效并且武器状态为可拾取</span></span><br><span class="line">    &#123;</span><br><span class="line">        AMainPlayer* MainPlayer = Cast&lt;AMainPlayer&gt;(OtherActor);</span><br><span class="line">        <span class="keyword">if</span> (MainPlayer)</span><br><span class="line">        &#123;</span><br><span class="line">            MainPlayer-&gt;OverlapingWeapon = <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AWeaponItem::OnOverlapEnd</span><span class="params">(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Super::OnOverlapEnd(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);</span><br><span class="line">    <span class="keyword">if</span> (OtherActor)</span><br><span class="line">    &#123;</span><br><span class="line">        AMainPlayer* MainPlayer = Cast&lt;AMainPlayer&gt;(OtherActor);</span><br><span class="line">        <span class="keyword">if</span> (MainPlayer &amp;&amp; MainPlayer-&gt;OverlapingWeapon==<span class="keyword">this</span>)</span><br><span class="line">            <span class="comment">//碰撞物体需要为MainPlayer并且发生Overlaping的Actor需要是自己</span></span><br><span class="line">            <span class="comment">//即，碰撞结束时，检测发生碰撞时，是否是自己发生碰撞，如果一开始玩家拾取的不是自己，那就不做后续操作</span></span><br><span class="line">        &#123;</span><br><span class="line">            MainPlayer-&gt;OverlapingWeapon = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AWeaponItem::Equip</span><span class="params">(AMainPlayer* MainPlayer)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (MainPlayer)<span class="comment">//判空</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> USkeletalMeshSocket* RightHandSocket = MainPlayer-&gt;GetMesh()-&gt;GetSocketByName(<span class="string">&quot;RightHandSocket&quot;</span>);</span><br><span class="line">        WeaponState = EWeaponState::EWS_Equipped;</span><br><span class="line">        DeActiveDisplayMeshCollision();</span><br><span class="line">        <span class="keyword">if</span> (RightHandSocket)</span><br><span class="line">        &#123;</span><br><span class="line">            RightHandSocket-&gt;AttachActor(<span class="keyword">this</span>, MainPlayer-&gt;GetMesh());</span><br><span class="line">            MainPlayer-&gt;bHasWeapon = <span class="literal">true</span>;<span class="comment">//玩家已持有武器</span></span><br><span class="line">            MainPlayer-&gt;EquipedWeapon = <span class="keyword">this</span>;<span class="comment">//装备当前武器</span></span><br><span class="line">            MainPlayer-&gt;OverlapingWeapon = <span class="literal">nullptr</span>;<span class="comment">//已装备武器，此时OverlapingWeapon为空</span></span><br><span class="line">            bNeedRotate = <span class="literal">false</span>;<span class="comment">//继承自InteractableItem</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (OnEquipSound)<span class="comment">//装备武器时发出声音</span></span><br><span class="line">            &#123;</span><br><span class="line">                UGameplayStatics::PlaySound2D(<span class="keyword">this</span>, OnEquipSound);<span class="comment">//当前类播放 OnEquipSound 音效</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!bShouldReserveIdlePartle)</span><br><span class="line">            &#123;</span><br><span class="line">                IdlePracticleComponent-&gt;Deactivate();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AWeaponItem::UnEquip</span><span class="params">(AMainPlayer* MainPlayer)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (MainPlayer &amp;&amp; !(MainPlayer-&gt;GetMovementComponent()-&gt;IsFalling())&amp;&amp;!(MainPlayer-&gt;bIsAttack))</span><br><span class="line">    &#123;</span><br><span class="line">        WeaponState = EWeaponState::EWS_CanPickUp;</span><br><span class="line">        ActiveDisplayMeshCollision();</span><br><span class="line">        MainPlayer-&gt;bHasWeapon = <span class="literal">false</span>;</span><br><span class="line">        MainPlayer-&gt;EquipedWeapon = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (MainPlayer-&gt;OverlapingWeapon == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            MainPlayer-&gt;OverlapingWeapon = <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);</span><br><span class="line">        SetActorRotation(FRotator(<span class="number">0.0f</span>));</span><br><span class="line">        SetActorScale3D(FVector(<span class="number">1.0f</span>));</span><br><span class="line"></span><br><span class="line">        bNeedRotate = <span class="literal">true</span>;</span><br><span class="line">        IdlePracticleComponent-&gt;Deactivate();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AWeaponItem::ActiveDisplayMeshCollision</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    DisplayMesh-&gt;SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);</span><br><span class="line">    DisplayMesh-&gt;SetCollisionObjectType(ECollisionChannel::ECC_WorldStatic);</span><br><span class="line">    DisplayMesh-&gt;SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);</span><br><span class="line">    DisplayMesh-&gt;SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);</span><br><span class="line">    <span class="comment">//PhysicsOnly 刚体 约束</span></span><br><span class="line">    <span class="comment">//QueryOnly 扫描 重叠 移动</span></span><br><span class="line">    <span class="comment">//QueryAndPhysics 上述全部</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AWeaponItem::DeActiveDisplayMeshCollision</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    DisplayMesh-&gt;SetCollisionEnabled(ECollisionEnabled::NoCollision);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="Player中配合使用的代码段"><a href="#Player中配合使用的代码段" class="headerlink" title="Player中配合使用的代码段"></a>Player中配合使用的代码段</h1><p><code>变量设计</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = <span class="string">&quot;Weapon|Status&quot;</span>)</span><br><span class="line"><span class="keyword">bool</span> bHasWeapon;</span><br><span class="line">   <span class="comment">//记录玩家当前是否装备武器，用于后续运动状态维护以及状态机维护</span></span><br><span class="line">   <span class="comment">//例如该变量可控制玩家当前是否可移动，跳跃等</span></span><br><span class="line"></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = <span class="string">&quot;Weapon&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AWeaponItem</span>* <span class="title">EquipedWeapon</span>;</span></span><br><span class="line">   <span class="comment">//该类存储当前装备的武器类指针，用于获取当前装备的武器</span></span><br><span class="line"></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = <span class="string">&quot;Weapon&quot;</span>)</span><br><span class="line">AWeaponItem* OverlapingWeapon;</span><br><span class="line">   <span class="comment">//该类存储当前发生碰撞的武器类指针，用于记录</span></span><br><span class="line">   </span><br><span class="line">   UPROPERTY(VisibleAnywhere,BlueprintReadWrite, Category = <span class="string">&quot;Animation|Attack&quot;</span>)</span><br><span class="line"><span class="keyword">bool</span> bAttackKeyDown;</span><br><span class="line">   <span class="comment">//玩家是否按下攻击键 InputAction</span></span><br><span class="line"></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = <span class="string">&quot;Animation|Attack&quot;</span>)</span><br><span class="line"><span class="keyword">bool</span> bIsAttacking;</span><br><span class="line">   <span class="comment">//玩家当前是否处于攻击状态</span></span><br><span class="line"></span><br><span class="line">UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = <span class="string">&quot;Animation|Attack&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UAnimMontage</span>* <span class="title">AttackMontage</span>;</span></span><br><span class="line">   <span class="comment">//攻击时的蒙太奇动画</span></span><br><span class="line"></span><br><span class="line">   UFUNCTION(BlueprintCallable)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InteractKeyDown</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="comment">//交互按键按下时</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AttackKeyDown</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="comment">//按下攻击键</span></span><br><span class="line"><span class="function">FORCEINLINE <span class="keyword">void</span> <span class="title">AttackKeyUp</span><span class="params">()</span> </span>&#123; bAttackKeyDown = <span class="literal">false</span>; &#125;</span><br><span class="line">   <span class="comment">//攻击键抬起时 将变量 bAttackKeyDown 设为false 使用FORCEINLINE宏，该方法无需再CPP文件中创建声明/定义</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Attack</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="comment">//攻击</span></span><br><span class="line">UFUNCTION(BlueprintCallable)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AttackEnd</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="comment">//攻击结束 该方法由蒙太奇动画发出Notify，再动画蓝图中调用</span></span><br></pre></td></tr></table></figure>
+
+<p><code>初始化变量</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bIsAttacking = <span class="literal">false</span>;</span><br><span class="line">bAttackKeyDown = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>绑定攻击Action</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::SetupPlayerInputComponent</span><span class="params">(UInputComponent* PlayerInputComponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Attack&quot;</span>, IE_Pressed, <span class="keyword">this</span>, &amp;AMainPlayer::AttackKeyDown);</span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Attack&quot;</span>, IE_Released, <span class="keyword">this</span>, &amp;AMainPlayer::AttackKeyUp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>按下攻击键</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::AttackKeyDown</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//按下Attack键，绑定的Action事件调用该函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    bAttackKeyDown = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (bHasWeapon)<span class="comment">//判断当前是否装备武器</span></span><br><span class="line">    &#123;</span><br><span class="line">        Attack();<span class="comment">//调用攻击函数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>攻击函数</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::Attack</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!bIsAttacking&amp;&amp;!(GetMovementComponent()-&gt;IsFalling()))</span><br><span class="line">    <span class="comment">//当前正在攻击或者正在空中时，不能攻击</span></span><br><span class="line">    &#123;</span><br><span class="line">        bIsAttacking = <span class="literal">true</span>;<span class="comment">//设置当前状态为正在攻击</span></span><br><span class="line">        UAnimInstance* AnimaInstance = GetMesh()-&gt;GetAnimInstance();</span><br><span class="line">        <span class="comment">//获取当前Mesh的AnimInstance 赋值给AnimaInstance</span></span><br><span class="line">        <span class="keyword">if</span> (AnimaInstance &amp;&amp; AttackMontage)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">float</span> PlayRate = FMath::RandRange(<span class="number">1.25f</span>, <span class="number">1.75f</span>);</span><br><span class="line">            <span class="comment">//随机蒙太奇播放速率 1.25/1.75</span></span><br><span class="line">            <span class="keyword">const</span> FString AnimSectionName = FString::FromInt(FMath::RandRange(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line">            <span class="comment">//随机蒙太奇播放片段 1/2 FName类，可通过强制类型转换，将FString转换为FName类</span></span><br><span class="line">            AnimaInstance-&gt;Montage_Play(AttackMontage, PlayRate);</span><br><span class="line">            <span class="comment">//播放蒙太奇动画</span></span><br><span class="line">            AnimaInstance-&gt;Montage_JumpToSection(FName(*AnimSectionName), AttackMontage);</span><br><span class="line">            <span class="comment">//直接播放某个片段</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>攻击结束时</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::AttackEnd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//该函数在蒙太奇动画播放结束时通过Nitify调用</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    bIsAttacking = <span class="literal">false</span>; <span class="comment">//将攻击状态设为false</span></span><br><span class="line">    <span class="keyword">if</span> (bAttackKeyDown)</span><br><span class="line">    &#123;</span><br><span class="line">        AttackKeyDown();</span><br><span class="line">        <span class="comment">//设置一个闭环，即按住攻击键不放，则会重复攻击</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GamePlay%E5%9F%BA%E7%A1%80/" rel="tag"># GamePlay基础</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/22/UE4%20C++%20SoundCue/" rel="prev" title="UE4 C++ SoundCue">
+                  <i class="fa fa-chevron-left"></i> UE4 C++ SoundCue
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Machl</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
