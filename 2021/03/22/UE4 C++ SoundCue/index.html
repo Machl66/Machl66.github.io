@@ -23,21 +23,20 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"machl66.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="description" content="UE4 C++ 变量常见宏 UPROPERTY书写格式12UPROPERTY(A,B,C)&#x2F;&#x2F;用逗号隔开float Money;  Category &#x3D; “A|B”创建分类，该分类会出现在该类的 ClassDefaults 下  | 后的为子分类，也可以不适用 | 即定义嵌套层级  BlueprintReadWrite设置该变量属性为蓝图可读可写，同时给予 Read &#x2F; Wri">
+<meta name="description" content="C++ SoundCue使用创建 SoundCue 类123UPROPERTY(EditAnywhere, BlueprintReadWrite, Category &#x3D; &quot;Interactable Item|Sounds&quot;)class USoundCue* OverlapSound;   &#x2F;&#x2F;创建一个OverlapSoundCue类 可在蓝图中赋值 在CPP文件中，播放Soun">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UE4 C++ 变量宏">
-<meta property="og:url" content="https://machl66.github.io/2021/03/07/UE4%20C++%20%E5%8F%98%E9%87%8F%E5%AE%8F/index.html">
+<meta property="og:title" content="UE4 C++ SoundCue">
+<meta property="og:url" content="https://machl66.github.io/2021/03/22/UE4%20C++%20SoundCue/index.html">
 <meta property="og:site_name" content="Machl">
-<meta property="og:description" content="UE4 C++ 变量常见宏 UPROPERTY书写格式12UPROPERTY(A,B,C)&#x2F;&#x2F;用逗号隔开float Money;  Category &#x3D; “A|B”创建分类，该分类会出现在该类的 ClassDefaults 下  | 后的为子分类，也可以不适用 | 即定义嵌套层级  BlueprintReadWrite设置该变量属性为蓝图可读可写，同时给予 Read &#x2F; Wri">
+<meta property="og:description" content="C++ SoundCue使用创建 SoundCue 类123UPROPERTY(EditAnywhere, BlueprintReadWrite, Category &#x3D; &quot;Interactable Item|Sounds&quot;)class USoundCue* OverlapSound;   &#x2F;&#x2F;创建一个OverlapSoundCue类 可在蓝图中赋值 在CPP文件中，播放Soun">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-07T10:51:20.000Z">
-<meta property="article:modified_time" content="2021-03-12T11:42:25.967Z">
+<meta property="article:published_time" content="2021-03-22T04:41:37.000Z">
+<meta property="article:modified_time" content="2021-03-22T04:57:42.052Z">
 <meta property="article:author" content="Machl">
-<meta property="article:tag" content="C++基础">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://machl66.github.io/2021/03/07/UE4%20C++%20%E5%8F%98%E9%87%8F%E5%AE%8F/">
+<link rel="canonical" href="https://machl66.github.io/2021/03/22/UE4%20C++%20SoundCue/">
 
 
 <script class="page-configurations">
@@ -49,7 +48,7 @@
     lang   : 'en'
   };
 </script>
-<title>UE4 C++ 变量宏 | Machl</title>
+<title>UE4 C++ SoundCue | Machl</title>
   
 
 
@@ -148,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UE4-C-%E5%8F%98%E9%87%8F%E5%B8%B8%E8%A7%81%E5%AE%8F-UPROPERTY"><span class="nav-number">1.</span> <span class="nav-text">UE4 C++ 变量常见宏 UPROPERTY</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A6%E5%86%99%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">书写格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Category-%E2%80%9CA-B%E2%80%9D"><span class="nav-number">1.1.1.</span> <span class="nav-text">Category &#x3D; “A|B”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BlueprintReadWrite"><span class="nav-number">1.1.2.</span> <span class="nav-text">BlueprintReadWrite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BlueprintReadOnly"><span class="nav-number">1.1.3.</span> <span class="nav-text">BlueprintReadOnly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BuleprintWriteOnly"><span class="nav-number">1.1.4.</span> <span class="nav-text">BuleprintWriteOnly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EditAnyWhere"><span class="nav-number">1.1.5.</span> <span class="nav-text">EditAnyWhere</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EditDefaultsOnly"><span class="nav-number">1.1.6.</span> <span class="nav-text">EditDefaultsOnly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VisibleAnyWhere"><span class="nav-number">1.1.7.</span> <span class="nav-text">VisibleAnyWhere</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-SoundCue%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">C++ SoundCue使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-SoundCue-%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">创建 SoundCue 类</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -205,7 +204,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/07/UE4%20C++%20%E5%8F%98%E9%87%8F%E5%AE%8F/">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/22/UE4%20C++%20SoundCue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -218,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          UE4 C++ 变量宏
+          UE4 C++ SoundCue
         </h1>
 
         <div class="post-meta-container">
@@ -228,16 +227,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-03-07 18:51:20" itemprop="dateCreated datePublished" datetime="2021-03-07T18:51:20+08:00">2021-03-07</time>
+      <time title="Created: 2021-03-22 12:41:37 / Modified: 12:57:42" itemprop="dateCreated datePublished" datetime="2021-03-22T12:41:37+08:00">2021-03-22</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-12 19:42:25" itemprop="dateModified" datetime="2021-03-12T19:42:25+08:00">2021-03-12</time>
-      </span>
 
   
 </div>
@@ -249,20 +242,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="UE4-C-变量常见宏-UPROPERTY"><a href="#UE4-C-变量常见宏-UPROPERTY" class="headerlink" title="UE4 C++ 变量常见宏 UPROPERTY"></a>UE4 C++ 变量常见宏 <code>UPROPERTY</code></h1><h2 id="书写格式"><a href="#书写格式" class="headerlink" title="书写格式"></a><code>书写格式</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(A,B,C)&#x2F;&#x2F;用逗号隔开</span><br><span class="line">float Money;</span><br></pre></td></tr></table></figure>
+        <h1 id="C-SoundCue使用"><a href="#C-SoundCue使用" class="headerlink" title="C++ SoundCue使用"></a>C++ SoundCue使用</h1><h2 id="创建-SoundCue-类"><a href="#创建-SoundCue-类" class="headerlink" title="创建 SoundCue 类"></a>创建 <code>SoundCue</code> 类</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Interactable Item|Sounds&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">USoundCue</span>* <span class="title">OverlapSound</span>;</span></span><br><span class="line">   <span class="comment">//创建一个OverlapSoundCue类 可在蓝图中赋值</span></span><br></pre></td></tr></table></figure>
+<p><code>在CPP文件中，播放SoundCue</code><br><code>需引入辅助类头文件</code> <code>#include &quot;Kismet/GameplayStatics.h&quot;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UGameplayStatics::PlaySound2D(<span class="keyword">this</span>, OverlapSound);<span class="comment">//当前类播放 OverlapSound 音效</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="Category-“A-B”"><a href="#Category-“A-B”" class="headerlink" title="Category = “A|B”"></a><code>Category = “A|B”</code></h3><pre><code>创建分类，该分类会出现在该类的 ClassDefaults 下
-
-| 后的为子分类，也可以不适用
-| 即定义嵌套层级
-</code></pre>
-<h3 id="BlueprintReadWrite"><a href="#BlueprintReadWrite" class="headerlink" title="BlueprintReadWrite"></a><code>BlueprintReadWrite</code></h3><p>设置该变量属性为蓝图可读可写，同时给予 Read / Write 权限。<br>可以在蓝图中调用 Get / Set 方法</p>
-<h3 id="BlueprintReadOnly"><a href="#BlueprintReadOnly" class="headerlink" title="BlueprintReadOnly"></a><code>BlueprintReadOnly</code></h3><p>只提供 Read权限<br>可调用Get方法</p>
-<h3 id="BuleprintWriteOnly"><a href="#BuleprintWriteOnly" class="headerlink" title="BuleprintWriteOnly"></a><code>BuleprintWriteOnly</code></h3><p>只提供Write权限<br>可调用Set方法</p>
-<h3 id="EditAnyWhere"><a href="#EditAnyWhere" class="headerlink" title="EditAnyWhere"></a><code>EditAnyWhere</code></h3><p>将变量暴露在信息面板中，以便随时修改变量（无需Set）</p>
-<h3 id="EditDefaultsOnly"><a href="#EditDefaultsOnly" class="headerlink" title="EditDefaultsOnly"></a><code>EditDefaultsOnly</code></h3><p>只能从ClassDefaults面板编辑，无法在Detail面板编辑<br>只能在编辑器中，打开该蓝图修改参数，但无法在场景中选中该BP进行修改参数</p>
-<h3 id="VisibleAnyWhere"><a href="#VisibleAnyWhere" class="headerlink" title="VisibleAnyWhere"></a><code>VisibleAnyWhere</code></h3><p>将变量暴露在面板中，但不能修改</p>
-
+<p><code>在构造函数中硬编码SoundCue初值</code> <code>需引入辅助类头文件</code> <code>#include &quot;UObject/ConstructorHelpers.h&quot;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> ConstructorHelpers::FObjectFinder&lt;USoundCue&gt; <span class="title">SoundCueAsset</span><span class="params">(TEXT(<span class="string">&quot;SoundCue&#x27;/Game/Assets/Audios/Blade_Cue.Blade_Cue&#x27;&quot;</span>))</span></span>;</span><br><span class="line"><span class="keyword">if</span> (SoundCueAsset.Succeeded())</span><br><span class="line">&#123;</span><br><span class="line">	OnEquipSound = SoundCueAsset.Object;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -270,22 +255,16 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/C-%E5%9F%BA%E7%A1%80/" rel="tag"># C++基础</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/03/07/UE4%20C++%20%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88/" rel="prev" title="UE4 C++ 粒子特效">
-                  <i class="fa fa-chevron-left"></i> UE4 C++ 粒子特效
+                <a href="/2021/03/12/UE4%20C++%20%E5%87%BD%E6%95%B0%E5%AE%8F/" rel="prev" title="UE4 C++ 函数宏">
+                  <i class="fa fa-chevron-left"></i> UE4 C++ 函数宏
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/03/08/UE4%20C++%E4%B8%AD%E7%BB%91%E5%AE%9A%E6%8C%89%E9%94%AEAction%E4%BA%8B%E4%BB%B6/" rel="next" title="UE4 C++ 绑定按键动作事件">
-                  UE4 C++ 绑定按键动作事件 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

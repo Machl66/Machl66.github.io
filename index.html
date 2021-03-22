@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -189,6 +189,75 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/22/UE4%20C++%20SoundCue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/22/UE4%20C++%20SoundCue/" class="post-title-link" itemprop="url">UE4 C++ SoundCue</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-22 12:41:37 / Modified: 12:57:42" itemprop="dateCreated datePublished" datetime="2021-03-22T12:41:37+08:00">2021-03-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="C-SoundCue使用"><a href="#C-SoundCue使用" class="headerlink" title="C++ SoundCue使用"></a>C++ SoundCue使用</h1><h2 id="创建-SoundCue-类"><a href="#创建-SoundCue-类" class="headerlink" title="创建 SoundCue 类"></a>创建 <code>SoundCue</code> 类</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Interactable Item|Sounds&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">USoundCue</span>* <span class="title">OverlapSound</span>;</span></span><br><span class="line">   <span class="comment">//创建一个OverlapSoundCue类 可在蓝图中赋值</span></span><br></pre></td></tr></table></figure>
+<p><code>在CPP文件中，播放SoundCue</code><br><code>需引入辅助类头文件</code> <code>#include &quot;Kismet/GameplayStatics.h&quot;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UGameplayStatics::PlaySound2D(<span class="keyword">this</span>, OverlapSound);<span class="comment">//当前类播放 OverlapSound 音效</span></span><br></pre></td></tr></table></figure>
+
+<p><code>在构造函数中硬编码SoundCue初值</code> <code>需引入辅助类头文件</code> <code>#include &quot;UObject/ConstructorHelpers.h&quot;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> ConstructorHelpers::FObjectFinder&lt;USoundCue&gt; <span class="title">SoundCueAsset</span><span class="params">(TEXT(<span class="string">&quot;SoundCue&#x27;/Game/Assets/Audios/Blade_Cue.Blade_Cue&#x27;&quot;</span>))</span></span>;</span><br><span class="line"><span class="keyword">if</span> (SoundCueAsset.Succeeded())</span><br><span class="line">&#123;</span><br><span class="line">	OnEquipSound = SoundCueAsset.Object;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
