@@ -31,7 +31,7 @@
 <meta property="og:description" content="UE4 C++ 变量常见宏 UPROPERTY书写格式12UPROPERTY(A,B,C)&#x2F;&#x2F;用逗号隔开float Money;  Category &#x3D; “A|B”创建分类，该分类会出现在该类的 ClassDefaults 下  | 后的为子分类，也可以不适用 | 即定义嵌套层级  BlueprintReadWrite设置该变量属性为蓝图可读可写，同时给予 Read &#x2F; Wri">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-07T10:51:20.000Z">
-<meta property="article:modified_time" content="2021-03-12T11:42:25.967Z">
+<meta property="article:modified_time" content="2021-03-24T01:15:14.875Z">
 <meta property="article:author" content="Machl">
 <meta property="article:tag" content="C++基础">
 <meta name="twitter:card" content="summary">
@@ -161,12 +161,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -236,7 +236,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-12 19:42:25" itemprop="dateModified" datetime="2021-03-12T19:42:25+08:00">2021-03-12</time>
+        <time title="Modified: 2021-03-24 09:15:14" itemprop="dateModified" datetime="2021-03-24T09:15:14+08:00">2021-03-24</time>
       </span>
 
   
@@ -256,12 +256,22 @@
 | 后的为子分类，也可以不适用
 | 即定义嵌套层级
 </code></pre>
-<h3 id="BlueprintReadWrite"><a href="#BlueprintReadWrite" class="headerlink" title="BlueprintReadWrite"></a><code>BlueprintReadWrite</code></h3><p>设置该变量属性为蓝图可读可写，同时给予 Read / Write 权限。<br>可以在蓝图中调用 Get / Set 方法</p>
-<h3 id="BlueprintReadOnly"><a href="#BlueprintReadOnly" class="headerlink" title="BlueprintReadOnly"></a><code>BlueprintReadOnly</code></h3><p>只提供 Read权限<br>可调用Get方法</p>
-<h3 id="BuleprintWriteOnly"><a href="#BuleprintWriteOnly" class="headerlink" title="BuleprintWriteOnly"></a><code>BuleprintWriteOnly</code></h3><p>只提供Write权限<br>可调用Set方法</p>
-<h3 id="EditAnyWhere"><a href="#EditAnyWhere" class="headerlink" title="EditAnyWhere"></a><code>EditAnyWhere</code></h3><p>将变量暴露在信息面板中，以便随时修改变量（无需Set）</p>
-<h3 id="EditDefaultsOnly"><a href="#EditDefaultsOnly" class="headerlink" title="EditDefaultsOnly"></a><code>EditDefaultsOnly</code></h3><p>只能从ClassDefaults面板编辑，无法在Detail面板编辑<br>只能在编辑器中，打开该蓝图修改参数，但无法在场景中选中该BP进行修改参数</p>
-<h3 id="VisibleAnyWhere"><a href="#VisibleAnyWhere" class="headerlink" title="VisibleAnyWhere"></a><code>VisibleAnyWhere</code></h3><p>将变量暴露在面板中，但不能修改</p>
+<h3 id="BlueprintReadWrite"><a href="#BlueprintReadWrite" class="headerlink" title="BlueprintReadWrite"></a><code>BlueprintReadWrite</code></h3><pre><code>设置该变量属性为蓝图可读可写，同时给予 Read / Write 权限。
+可以在蓝图中调用 Get / Set 方法
+</code></pre>
+<h3 id="BlueprintReadOnly"><a href="#BlueprintReadOnly" class="headerlink" title="BlueprintReadOnly"></a><code>BlueprintReadOnly</code></h3><pre><code>只提供 Read权限
+可调用Get方法
+</code></pre>
+<h3 id="BuleprintWriteOnly"><a href="#BuleprintWriteOnly" class="headerlink" title="BuleprintWriteOnly"></a><code>BuleprintWriteOnly</code></h3><pre><code>只提供Write权限
+可调用Set方法
+</code></pre>
+<h3 id="EditAnyWhere"><a href="#EditAnyWhere" class="headerlink" title="EditAnyWhere"></a><code>EditAnyWhere</code></h3><pre><code>将变量暴露在信息面板中，以便随时修改变量（无需Set）
+</code></pre>
+<h3 id="EditDefaultsOnly"><a href="#EditDefaultsOnly" class="headerlink" title="EditDefaultsOnly"></a><code>EditDefaultsOnly</code></h3><pre><code>只能从ClassDefaults面板编辑，无法在Detail面板编辑
+只能在编辑器中，打开该蓝图修改参数，但无法在场景中选中该BP进行修改参数
+</code></pre>
+<h3 id="VisibleAnyWhere"><a href="#VisibleAnyWhere" class="headerlink" title="VisibleAnyWhere"></a><code>VisibleAnyWhere</code></h3><pre><code>将变量暴露在面板中，但不能修改
+</code></pre>
 
     </div>
 

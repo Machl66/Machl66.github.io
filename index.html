@@ -155,12 +155,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -189,6 +189,72 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/24/UE4%20%E7%83%AD%E6%9B%B4%E6%96%B0%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/24/UE4%20%E7%83%AD%E6%9B%B4%E6%96%B0%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">UE4 热更新工具使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-24 19:32:46 / Modified: 19:47:58" itemprop="dateCreated datePublished" datetime="2021-03-24T19:32:46+08:00">2021-03-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p>以4.25.X为基础开发 需使用C++ 纯蓝图未尝试</p>
+<h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><h3 id="1-将-Plugins文件夹，放到项目路径下，与-Content平级"><a href="#1-将-Plugins文件夹，放到项目路径下，与-Content平级" class="headerlink" title="1.将/Plugins文件夹，放到项目路径下，与 /Content平级"></a>1.将<code>/Plugins</code>文件夹，放到项目路径下，与 <code>/Content</code>平级</h3><h3 id="2-点击uproject文件夹，重新Generate-VS项目文件"><a href="#2-点击uproject文件夹，重新Generate-VS项目文件" class="headerlink" title="2.点击uproject文件夹，重新Generate VS项目文件"></a>2.点击uproject文件夹，重新Generate VS项目文件</h3><h3 id="3-打开uproject项目，查看插件是否已启用"><a href="#3-打开uproject项目，查看插件是否已启用" class="headerlink" title="3.打开uproject项目，查看插件是否已启用"></a>3.打开uproject项目，查看插件是否已启用</h3><p><img src="images/T_CheckPlugins.png" alt="1"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -672,10 +738,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-03-08 20:04:40 / Modified: 21:29:15" itemprop="dateCreated datePublished" datetime="2021-03-08T20:04:40+08:00">2021-03-08</time>
+      <time title="Created: 2021-03-08 20:04:40" itemprop="dateCreated datePublished" datetime="2021-03-08T20:04:40+08:00">2021-03-08</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-24 09:15:14" itemprop="dateModified" datetime="2021-03-24T09:15:14+08:00">2021-03-24</time>
+      </span>
 
   
 </div>
@@ -697,7 +769,7 @@
 <h3 id="在-cpp文件中写绑定语句"><a href="#在-cpp文件中写绑定语句" class="headerlink" title="在.cpp文件中写绑定语句"></a>在.cpp文件中写绑定语句</h3><p>需要引入头文件才可以调用 <code>PlayerInputComponent</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;Components&#x2F;InputComponent.h&quot;</span><br></pre></td></tr></table></figure>
 <p>写在上面声明的方法中</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::SetupPlayerInputComponent</span><span class="params">(UInputComponent* PlayerInputComponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Pressed, <span class="keyword">this</span>, &amp;AMainPlayer::Jump);   </span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Released, <span class="keyword">this</span>, &amp;ACharacter::StopJumping);</span><br><span class="line">    <span class="comment">//(ProjecSettings中的动作事件名，按下或者松开，绑定到哪个类，用取地址符获得绑定到哪个方法上)</span></span><br><span class="line">    <span class="comment">//即按下SpaceBar，触发Jump事件，Jump事件会触发绑定的AMainPlayer中的Jump事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::SetupPlayerInputComponent</span><span class="params">(UInputComponent* PlayerInputComponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Pressed, <span class="keyword">this</span>, &amp;AMainPlayer::Jump);   </span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Released, <span class="keyword">this</span>, &amp;ACharacter::StopJumping);</span><br><span class="line">    <span class="comment">//(ProjecSettings中的动作事件名，按下或者松开，绑定到哪个类，用取地址符获得绑定到哪个方法上)</span></span><br><span class="line">    <span class="comment">//即按下SpaceBar，触发Jump事件，Jump事件会触发绑定的AMainPlayer中的Jump事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -754,7 +826,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-12 19:42:25" itemprop="dateModified" datetime="2021-03-12T19:42:25+08:00">2021-03-12</time>
+        <time title="Modified: 2021-03-24 09:15:14" itemprop="dateModified" datetime="2021-03-24T09:15:14+08:00">2021-03-24</time>
       </span>
 
   
@@ -774,12 +846,22 @@
 | 后的为子分类，也可以不适用
 | 即定义嵌套层级
 </code></pre>
-<h3 id="BlueprintReadWrite"><a href="#BlueprintReadWrite" class="headerlink" title="BlueprintReadWrite"></a><code>BlueprintReadWrite</code></h3><p>设置该变量属性为蓝图可读可写，同时给予 Read / Write 权限。<br>可以在蓝图中调用 Get / Set 方法</p>
-<h3 id="BlueprintReadOnly"><a href="#BlueprintReadOnly" class="headerlink" title="BlueprintReadOnly"></a><code>BlueprintReadOnly</code></h3><p>只提供 Read权限<br>可调用Get方法</p>
-<h3 id="BuleprintWriteOnly"><a href="#BuleprintWriteOnly" class="headerlink" title="BuleprintWriteOnly"></a><code>BuleprintWriteOnly</code></h3><p>只提供Write权限<br>可调用Set方法</p>
-<h3 id="EditAnyWhere"><a href="#EditAnyWhere" class="headerlink" title="EditAnyWhere"></a><code>EditAnyWhere</code></h3><p>将变量暴露在信息面板中，以便随时修改变量（无需Set）</p>
-<h3 id="EditDefaultsOnly"><a href="#EditDefaultsOnly" class="headerlink" title="EditDefaultsOnly"></a><code>EditDefaultsOnly</code></h3><p>只能从ClassDefaults面板编辑，无法在Detail面板编辑<br>只能在编辑器中，打开该蓝图修改参数，但无法在场景中选中该BP进行修改参数</p>
-<h3 id="VisibleAnyWhere"><a href="#VisibleAnyWhere" class="headerlink" title="VisibleAnyWhere"></a><code>VisibleAnyWhere</code></h3><p>将变量暴露在面板中，但不能修改</p>
+<h3 id="BlueprintReadWrite"><a href="#BlueprintReadWrite" class="headerlink" title="BlueprintReadWrite"></a><code>BlueprintReadWrite</code></h3><pre><code>设置该变量属性为蓝图可读可写，同时给予 Read / Write 权限。
+可以在蓝图中调用 Get / Set 方法
+</code></pre>
+<h3 id="BlueprintReadOnly"><a href="#BlueprintReadOnly" class="headerlink" title="BlueprintReadOnly"></a><code>BlueprintReadOnly</code></h3><pre><code>只提供 Read权限
+可调用Get方法
+</code></pre>
+<h3 id="BuleprintWriteOnly"><a href="#BuleprintWriteOnly" class="headerlink" title="BuleprintWriteOnly"></a><code>BuleprintWriteOnly</code></h3><pre><code>只提供Write权限
+可调用Set方法
+</code></pre>
+<h3 id="EditAnyWhere"><a href="#EditAnyWhere" class="headerlink" title="EditAnyWhere"></a><code>EditAnyWhere</code></h3><pre><code>将变量暴露在信息面板中，以便随时修改变量（无需Set）
+</code></pre>
+<h3 id="EditDefaultsOnly"><a href="#EditDefaultsOnly" class="headerlink" title="EditDefaultsOnly"></a><code>EditDefaultsOnly</code></h3><pre><code>只能从ClassDefaults面板编辑，无法在Detail面板编辑
+只能在编辑器中，打开该蓝图修改参数，但无法在场景中选中该BP进行修改参数
+</code></pre>
+<h3 id="VisibleAnyWhere"><a href="#VisibleAnyWhere" class="headerlink" title="VisibleAnyWhere"></a><code>VisibleAnyWhere</code></h3><pre><code>将变量暴露在面板中，但不能修改
+</code></pre>
 
       
     </div>
@@ -877,87 +959,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/07/UE4%20C++%20UMG%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Machl">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Machl">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/07/UE4%20C++%20UMG%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">UE4 C++ UMG基础</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-07 12:27:36" itemprop="dateCreated datePublished" datetime="2021-03-07T12:27:36+08:00">2021-03-07</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-08 21:29:19" itemprop="dateModified" datetime="2021-03-08T21:29:19+08:00">2021-03-08</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="UE4-C-UMG"><a href="#UE4-C-UMG" class="headerlink" title="UE4 C++ UMG"></a>UE4 C++ UMG</h1><h2 id="创建-UMG-并添加到-Viewport"><a href="#创建-UMG-并添加到-Viewport" class="headerlink" title="创建 UMG 并添加到 Viewport"></a>创建 UMG 并添加到 Viewport</h2><h4 id="1-添加UMG模块"><a href="#1-添加UMG模块" class="headerlink" title="1.添加UMG模块"></a>1.添加UMG模块</h4><p>Source\项目名称\项目名称.Build.cs</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PublicDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;Core&quot;</span>, <span class="string">&quot;CoreUObject&quot;</span>,</span><br><span class="line"> <span class="string">&quot;Engine&quot;</span>, <span class="string">&quot;InputCore&quot;</span>, <span class="string">&quot;UMG&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>添加“UMG”模块。</p>
-<h4 id="2-在GameMode中声明-UserWidget-类"><a href="#2-在GameMode中声明-UserWidget-类" class="headerlink" title="2.在GameMode中声明 UserWidget 类"></a>2.在GameMode中声明 UserWidget 类</h4><h5 id="cpp头文件"><a href="#cpp头文件" class="headerlink" title=".cpp头文件"></a>.cpp头文件</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Blueprint/UserWidget.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Kismet/GameplayStatics.h&quot;</span></span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = <span class="string">&quot;UI Widgets&quot;</span>)</span><br><span class="line">	TSubclassOf&lt;<span class="class"><span class="keyword">class</span> <span class="title">UUserWidget</span>&gt;</span> MainUIClass;<span class="comment">//声明类</span></span><br><span class="line"><span class="comment">//在蓝图中指定MainUI类，即赋值</span></span><br><span class="line">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;UI Widgets&quot;</span>)</span><br><span class="line">	UUserWidget* MainUI;<span class="comment">//创建一个UserWidget类变量</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-在-GameMode-中的BeginPlay下创建"><a href="#3-在-GameMode-中的BeginPlay下创建" class="headerlink" title="3.在 GameMode 中的BeginPlay下创建"></a>3.在 GameMode 中的BeginPlay下创建</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ALevel1GameMode::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::BeginPlay();<span class="comment">//该GameMode是子类，优先执行父类的BeginPlay</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (MainUIClass)<span class="comment">//安全性判断</span></span><br><span class="line">	&#123;</span><br><span class="line">		MainUI = CreateWidget&lt;UUserWidget&gt;(UGameplayStatics::GetPlayerController(<span class="keyword">this</span>,<span class="number">0</span>),MainUIClass);</span><br><span class="line">		<span class="comment">//给MainUI赋值，值为通过MainUIClass类创建的UserWidget</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (MainUI)<span class="comment">//安全性判断</span></span><br><span class="line">	&#123;</span><br><span class="line">		MainUI-&gt;AddToViewport();</span><br><span class="line">		<span class="comment">//将赋值过后的MainUI添加到视口</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 <script>
