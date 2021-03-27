@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -189,6 +189,322 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/08/UE4%20C++%20%E4%BC%A4%E5%AE%B3%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/08/UE4%20C++%20%E4%BC%A4%E5%AE%B3%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">UE4 C++ 伤害系统</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-08 20:44:13 / Modified: 21:29:19" itemprop="dateCreated datePublished" datetime="2021-03-08T20:44:13+08:00">2021-03-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="UE4-C-伤害系统使用"><a href="#UE4-C-伤害系统使用" class="headerlink" title="UE4 C++ 伤害系统使用"></a>UE4 C++ 伤害系统使用</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/08/UE4%20C++%E4%B8%AD%E7%BB%91%E5%AE%9A%E6%8C%89%E9%94%AEAction%E4%BA%8B%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/08/UE4%20C++%E4%B8%AD%E7%BB%91%E5%AE%9A%E6%8C%89%E9%94%AEAction%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">UE4 C++ 绑定按键动作事件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-08 20:04:40" itemprop="dateCreated datePublished" datetime="2021-03-08T20:04:40+08:00">2021-03-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-24 09:15:14" itemprop="dateModified" datetime="2021-03-24T09:15:14+08:00">2021-03-24</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="在C-中绑定按键Action事件"><a href="#在C-中绑定按键Action事件" class="headerlink" title="在C++中绑定按键Action事件"></a>在C++中绑定按键Action事件</h1><h3 id="添加动作名称和触发按键"><a href="#添加动作名称和触发按键" class="headerlink" title="添加动作名称和触发按键"></a>添加动作名称和触发按键</h3><p>在ProjectSettings中，Engine –&gt; Input –&gt; Bindings –&gt; ActionMappings中</p>
+<p>添加动作名称</p>
+<p>例如：Jump</p>
+<p>触发按键为：SpaceBar</p>
+<h3 id="在-h文件中声明用来绑定该-ActionEvent-的方法"><a href="#在-h文件中声明用来绑定该-ActionEvent-的方法" class="headerlink" title="在.h文件中声明用来绑定该 ActionEvent 的方法"></a>在.h文件中声明用来绑定该 ActionEvent 的方法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//例子中的.h文件为继承自ACharacter类的子类</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Jump</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"><span class="comment">//重写ACharacter类里面的Jump方法</span></span><br><span class="line">   <span class="comment">//通常如果需要用到动作映射和轴映射，习惯将动作映射方法声明和绑定写在轴映射上方</span></span><br><span class="line"></span><br><span class="line">   UFUNCTION(BlueprintCallable, Category=Character)</span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">StopJumping</span><span class="params">()</span></span>;<span class="comment">//StopJumping方法不重写 该段代码取自Character.h源码</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在-h文件中写一个方法用来写绑定的语句"><a href="#在-h文件中写一个方法用来写绑定的语句" class="headerlink" title="在.h文件中写一个方法用来写绑定的语句"></a>在.h文件中写一个方法用来写绑定的语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Called to bind functionality to input</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">SetupPlayerInputComponent</span><span class="params">(class UInputComponent* PlayerInputComponent)</span> <span class="keyword">override</span></span>;<span class="comment">//ACharacter类自带该方法</span></span><br></pre></td></tr></table></figure>
+<h3 id="在-cpp文件中写绑定语句"><a href="#在-cpp文件中写绑定语句" class="headerlink" title="在.cpp文件中写绑定语句"></a>在.cpp文件中写绑定语句</h3><p>需要引入头文件才可以调用 <code>PlayerInputComponent</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;Components&#x2F;InputComponent.h&quot;</span><br></pre></td></tr></table></figure>
+<p>写在上面声明的方法中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMainPlayer::SetupPlayerInputComponent</span><span class="params">(UInputComponent* PlayerInputComponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Pressed, <span class="keyword">this</span>, &amp;AMainPlayer::Jump);   </span><br><span class="line">	PlayerInputComponent-&gt;BindAction(<span class="string">&quot;Jump&quot;</span>, IE_Released, <span class="keyword">this</span>, &amp;ACharacter::StopJumping);</span><br><span class="line">    <span class="comment">//(ProjecSettings中的动作事件名，按下或者松开，绑定到哪个类，用取地址符获得绑定到哪个方法上)</span></span><br><span class="line">    <span class="comment">//即按下SpaceBar，触发Jump事件，Jump事件会触发绑定的AMainPlayer中的Jump事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/07/UE4%20C++%20%E5%8F%98%E9%87%8F%E5%AE%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/07/UE4%20C++%20%E5%8F%98%E9%87%8F%E5%AE%8F/" class="post-title-link" itemprop="url">UE4 C++ 变量宏</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-07 18:51:20" itemprop="dateCreated datePublished" datetime="2021-03-07T18:51:20+08:00">2021-03-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-24 09:15:14" itemprop="dateModified" datetime="2021-03-24T09:15:14+08:00">2021-03-24</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="UE4-C-变量常见宏-UPROPERTY"><a href="#UE4-C-变量常见宏-UPROPERTY" class="headerlink" title="UE4 C++ 变量常见宏 UPROPERTY"></a>UE4 C++ 变量常见宏 <code>UPROPERTY</code></h1><h2 id="书写格式"><a href="#书写格式" class="headerlink" title="书写格式"></a><code>书写格式</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(A,B,C)&#x2F;&#x2F;用逗号隔开</span><br><span class="line">float Money;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Category-“A-B”"><a href="#Category-“A-B”" class="headerlink" title="Category = “A|B”"></a><code>Category = “A|B”</code></h3><pre><code>创建分类，该分类会出现在该类的 ClassDefaults 下
+
+| 后的为子分类，也可以不适用
+| 即定义嵌套层级
+</code></pre>
+<h3 id="BlueprintReadWrite"><a href="#BlueprintReadWrite" class="headerlink" title="BlueprintReadWrite"></a><code>BlueprintReadWrite</code></h3><pre><code>设置该变量属性为蓝图可读可写，同时给予 Read / Write 权限。
+可以在蓝图中调用 Get / Set 方法
+</code></pre>
+<h3 id="BlueprintReadOnly"><a href="#BlueprintReadOnly" class="headerlink" title="BlueprintReadOnly"></a><code>BlueprintReadOnly</code></h3><pre><code>只提供 Read权限
+可调用Get方法
+</code></pre>
+<h3 id="BuleprintWriteOnly"><a href="#BuleprintWriteOnly" class="headerlink" title="BuleprintWriteOnly"></a><code>BuleprintWriteOnly</code></h3><pre><code>只提供Write权限
+可调用Set方法
+</code></pre>
+<h3 id="EditAnyWhere"><a href="#EditAnyWhere" class="headerlink" title="EditAnyWhere"></a><code>EditAnyWhere</code></h3><pre><code>将变量暴露在信息面板中，以便随时修改变量（无需Set）
+</code></pre>
+<h3 id="EditDefaultsOnly"><a href="#EditDefaultsOnly" class="headerlink" title="EditDefaultsOnly"></a><code>EditDefaultsOnly</code></h3><pre><code>只能从ClassDefaults面板编辑，无法在Detail面板编辑
+只能在编辑器中，打开该蓝图修改参数，但无法在场景中选中该BP进行修改参数
+</code></pre>
+<h3 id="VisibleAnyWhere"><a href="#VisibleAnyWhere" class="headerlink" title="VisibleAnyWhere"></a><code>VisibleAnyWhere</code></h3><pre><code>将变量暴露在面板中，但不能修改
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/07/UE4%20C++%20%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/07/UE4%20C++%20%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88/" class="post-title-link" itemprop="url">UE4 C++ 粒子特效</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-07 18:42:37" itemprop="dateCreated datePublished" datetime="2021-03-07T18:42:37+08:00">2021-03-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-08 21:29:19" itemprop="dateModified" datetime="2021-03-08T21:29:19+08:00">2021-03-08</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="在C-中创建粒子系统的变量和组件"><a href="#在C-中创建粒子系统的变量和组件" class="headerlink" title="在C++中创建粒子系统的变量和组件"></a>在C++中创建粒子系统的变量和组件</h1><h2 id="创建粒子特效变量"><a href="#创建粒子特效变量" class="headerlink" title="创建粒子特效变量"></a>创建粒子特效变量</h2><p>在.h文件中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = <span class="string">&quot;Interactable Item|Particles&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UParticleSystem</span>* <span class="title">OverlapParticle</span>;</span></span><br><span class="line">   <span class="comment">//创建一个粒子特效变量 OverlapParticle</span></span><br><span class="line">   <span class="comment">//可在蓝图中赋值（初始化）</span></span><br></pre></td></tr></table></figure>
+<h3 id="在-cpp中-通过-UGamePlayStatics-类中的方法来生成粒子特效"><a href="#在-cpp中-通过-UGamePlayStatics-类中的方法来生成粒子特效" class="headerlink" title="在.cpp中 通过 UGamePlayStatics 类中的方法来生成粒子特效"></a>在.cpp中 通过 <code>UGamePlayStatics</code> 类中的方法来生成粒子特效</h3><h4 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h4><p><code>#include &quot;Kismet/GameplayStatics.h&quot;</code> </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (OverlapParticle)<span class="comment">//安全性判断 防止没有给变量赋值</span></span><br><span class="line">&#123;</span><br><span class="line">	UGameplayStatics::SpawnEmitterAtLocation(<span class="keyword">this</span>,OverlapParticle,GetActorLocation(),FRotator(<span class="number">0.0f</span>),<span class="literal">true</span>);</span><br><span class="line">	<span class="comment">//生成粒子特效 需引入Kismet/GameplayStatics.h 才能使用UGamePlayStatic类</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建粒子特效组件"><a href="#创建粒子特效组件" class="headerlink" title="创建粒子特效组件"></a>创建粒子特效组件</h2> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPROPERTY(VisibleAnyWhere, BlueprintReadWrite, Category = <span class="string">&quot;Interactable Item|Particles&quot;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UParticleSystemComponent</span>* <span class="title">IdlePracticleComponent</span>;</span></span><br><span class="line">   <span class="comment">//Component组件会在编辑器面板中以组件的形式存在</span></span><br><span class="line">   <span class="comment">//不同于上方的变量，变量是该类本身的一个属性值，可对其赋值并调用</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="在-cpp构造函数中创建该组件"><a href="#在-cpp构造函数中创建该组件" class="headerlink" title="在.cpp构造函数中创建该组件"></a>在.cpp构造函数中创建该组件</h2><p>需要引入头文件<br><code>#include &quot;Particles/ParticleSystemComponent.h&quot;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IdlePracticleComponent = CreateDefaultSubobject&lt;UParticleSystemComponent&gt;(TEXT(<span class="string">&quot;IdleParticleComponent&quot;</span>));</span><br><span class="line">IdlePracticleComponent-&gt;SetupAttachment(GetRootComponent());</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

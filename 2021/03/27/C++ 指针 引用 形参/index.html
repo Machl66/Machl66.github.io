@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"machl66.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="函数通过引用传参直接传变量产生内存拷贝，效率低，不会对实际变量进行修改赋值，只针对形参 12345678910111213141516171819202122232425struct FTestStruct&amp;#123;	int a;	int b;	long int c;&amp;#125;;void Test(FTestStruct aa) &amp;#123;    aa.a&#x3D;100;    &#x2F;&#x2F;传的是变量，这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 指针 引用 形参">
+<meta property="og:url" content="https://machl66.github.io/2021/03/27/C++%20%E6%8C%87%E9%92%88%20%E5%BC%95%E7%94%A8%20%E5%BD%A2%E5%8F%82/index.html">
+<meta property="og:site_name" content="Machl">
+<meta property="og:description" content="函数通过引用传参直接传变量产生内存拷贝，效率低，不会对实际变量进行修改赋值，只针对形参 12345678910111213141516171819202122232425struct FTestStruct&amp;#123;	int a;	int b;	long int c;&amp;#125;;void Test(FTestStruct aa) &amp;#123;    aa.a&#x3D;100;    &#x2F;&#x2F;传的是变量，这">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-27T03:24:32.000Z">
+<meta property="article:modified_time" content="2021-03-27T04:27:16.243Z">
+<meta property="article:author" content="Machl">
+<meta property="article:tag" content="C++基础">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://machl66.github.io/2021/03/27/C++%20%E6%8C%87%E9%92%88%20%E5%BC%95%E7%94%A8%20%E5%BD%A2%E5%8F%82/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>C++ 指针 引用 形参 | Machl</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Machl</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%80%9A%E8%BF%87%E5%BC%95%E7%94%A8%E4%BC%A0%E5%8F%82"><span class="nav-number">1.</span> <span class="nav-text">函数通过引用传参</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%BC%A0%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">直接传变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%BC%95%E7%94%A8%E4%BC%A0%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">通过引用传变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%8C%87%E9%92%88%E4%BC%A0%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">通过指针传变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">引用的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E5%BF%85%E9%A1%BB%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">引用必须初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E5%8F%AF%E4%BB%A5%E8%A2%AB%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">一个变量可以被多个对象引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E5%85%B7%E6%9C%89%E5%94%AF%E4%B8%80%E6%80%A7-%E4%B8%80%E6%97%A6%E7%BB%91%E5%AE%9A%E4%BA%86%E6%9F%90%E4%B8%AA%E5%AE%9E%E4%BD%93%EF%BC%8C%E5%B0%B1%E4%B8%8D%E8%83%BD%E8%A2%AB%E5%85%B6%E4%BB%96%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">引用具有唯一性 一旦绑定了某个实体，就不能被其他对象引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E9%92%88%E5%9C%A8%E5%BA%95%E5%B1%82%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84-%E9%83%BD%E6%98%AF%E9%80%9A%E8%BF%87%E6%8C%87%E9%92%88%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.4.</span> <span class="nav-text">引用和指针在底层的实现方式是一样的 都是通过指针方式实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E6%B2%A1%E6%9C%89%E7%A9%BA%E5%BC%95%E7%94%A8%EF%BC%8C%E4%BD%86%E6%98%AF%E6%9C%89%E7%A9%BA%E6%8C%87%E9%92%88%E3%80%82%E5%8D%B3%E6%8C%87%E9%92%88%E5%8F%AF%E4%BB%A5%E4%B8%8D%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.5.</span> <span class="nav-text">引用没有空引用，但是有空指针。即指针可以不初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E9%80%9A%E8%BF%87sizeof%E6%9D%A5%E7%AE%97%E5%AD%97%E8%8A%82%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.6.</span> <span class="nav-text">如果通过sizeof来算字节大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9%E6%8C%87%E5%90%91%E7%9A%84%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%BC%95%E7%94%A8%E4%B8%8D%E5%8F%AF%E4%BB%A5"><span class="nav-number">2.7.</span> <span class="nav-text">指针可以修改指向的地址，引用不可以</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Machl</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://machl66.github.io/2021/03/27/C++%20%E6%8C%87%E9%92%88%20%E5%BC%95%E7%94%A8%20%E5%BD%A2%E5%8F%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Machl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Machl">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++ 指针 引用 形参
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-27 11:24:32 / Modified: 12:27:16" itemprop="dateCreated datePublished" datetime="2021-03-27T11:24:32+08:00">2021-03-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="函数通过引用传参"><a href="#函数通过引用传参" class="headerlink" title="函数通过引用传参"></a>函数通过引用传参</h1><h2 id="直接传变量"><a href="#直接传变量" class="headerlink" title="直接传变量"></a>直接传变量</h2><p><code>产生内存拷贝，效率低，不会对实际变量进行修改赋值，只针对形参</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FTestStruct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> b;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">(FTestStruct aa)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    aa.a=<span class="number">100</span>;</span><br><span class="line">    <span class="comment">//传的是变量，这里的修改是对形参aa进行的修改，而不是对传进来的变量进行修改</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	FTestStruct c;</span><br><span class="line">	c.a = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//需要对值进行初始化，否则无法进行操作</span></span><br><span class="line">	Test(c);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; c.a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出结果为0</span></span><br><span class="line">    <span class="comment">//Test函数中 “aa.a=100” 并未对传入的c进行修改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="通过引用传变量"><a href="#通过引用传变量" class="headerlink" title="通过引用传变量"></a>通过引用传变量</h2><p><code>高效，不产生内存拷贝，C语言不支持但C++优先使用传引用,比指针高效</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FTestStruct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> b;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">(FTestStruct &amp;aa)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    aa.a=<span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	FTestStruct c;</span><br><span class="line">	Test(c);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; c.a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出结果为100，对传入的变量进行了实际修改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不产生内存拷贝 形参相当于传入变量的别名，实际操作针对传入的变量</span></span><br></pre></td></tr></table></figure>
+<h2 id="通过指针传变量"><a href="#通过指针传变量" class="headerlink" title="通过指针传变量"></a>通过指针传变量</h2><p><code>产生指针的内存拷贝，但是可以对传入变量进行修改，效率适中。C语言和C++都支持</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FTestStruct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> b;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//指针自己占4个字节，产生了指针的内存拷贝</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">(FTestStruct *aa)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	aa-&gt;a = <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FTestStruct c;</span><br><span class="line">	Test(&amp;c);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; c.a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="引用的特性"><a href="#引用的特性" class="headerlink" title="引用的特性"></a>引用的特性</h1><h2 id="引用必须初始化"><a href="#引用必须初始化" class="headerlink" title="引用必须初始化"></a><code>引用必须初始化</code></h2><h2 id="一个变量可以被多个对象引用"><a href="#一个变量可以被多个对象引用" class="headerlink" title="一个变量可以被多个对象引用"></a><code>一个变量可以被多个对象引用</code></h2><h2 id="引用具有唯一性-一旦绑定了某个实体，就不能被其他对象引用"><a href="#引用具有唯一性-一旦绑定了某个实体，就不能被其他对象引用" class="headerlink" title="引用具有唯一性 一旦绑定了某个实体，就不能被其他对象引用"></a><code>引用具有唯一性 一旦绑定了某个实体，就不能被其他对象引用</code></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FTestStruct a;</span><br><span class="line">FTestStruct &amp;a1 = a;<span class="comment">//初始化引用，相当于a1是a的别名</span></span><br><span class="line">FTestStruct &amp;a2 = a;<span class="comment">//可以被多个对象引用 相当于这个变量有n个别名</span></span><br><span class="line">a2.a=<span class="number">0</span>;<span class="comment">//通过“.”访问</span></span><br><span class="line">FTestStruct &amp;a3 = <span class="literal">NULL</span>;<span class="comment">//不能等于Null 直接崩溃</span></span><br><span class="line"><span class="comment">//引用的唯一性</span></span><br><span class="line">FTestStruct &amp;a3 = a;</span><br><span class="line"><span class="comment">//a3已经绑定了a这个变量，a3不能再绑定其他变量</span></span><br></pre></td></tr></table></figure>
+<h2 id="引用和指针在底层的实现方式是一样的-都是通过指针方式实现"><a href="#引用和指针在底层的实现方式是一样的-都是通过指针方式实现" class="headerlink" title="引用和指针在底层的实现方式是一样的 都是通过指针方式实现"></a>引用和指针在底层的实现方式是一样的 都是通过指针方式实现</h2><h2 id="引用没有空引用，但是有空指针。即指针可以不初始化"><a href="#引用没有空引用，但是有空指针。即指针可以不初始化" class="headerlink" title="引用没有空引用，但是有空指针。即指针可以不初始化"></a>引用没有空引用，但是有空指针。即指针可以不初始化</h2><h2 id="如果通过sizeof来算字节大小"><a href="#如果通过sizeof来算字节大小" class="headerlink" title="如果通过sizeof来算字节大小"></a>如果通过sizeof来算字节大小</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">FTestStruct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    FTestStruct c;</span><br><span class="line">    FTestStruct&amp; a1 = c;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a1) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出的字节大小为该结构体中，成员变量的字节大小相加</span></span><br><span class="line">    FTestStruct* a2;</span><br><span class="line">    a2 = &amp;c;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a2) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出的字节大小为该指针的字节大小 4个字节</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="指针可以修改指向的地址，引用不可以"><a href="#指针可以修改指向的地址，引用不可以" class="headerlink" title="指针可以修改指向的地址，引用不可以"></a>指针可以修改指向的地址，引用不可以</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FTestStruct a;</span><br><span class="line">FTestStruct b;</span><br><span class="line">FTestStruct *a1;</span><br><span class="line">a1 = &amp;a;<span class="comment">//此时a1指针指向a</span></span><br><span class="line">a1 = &amp;b;<span class="comment">//此时a1指针指向了b 发生了修改</span></span><br><span class="line"></span><br><span class="line">FTestStruct &amp;a2 = a;<span class="comment">//a2是变量a的引用</span></span><br><span class="line">a2 = b;<span class="comment">//此时相当于把b赋值给a，a2仍然是a的引用</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-%E5%9F%BA%E7%A1%80/" rel="tag"># C++基础</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/24/HotUpdate/" rel="prev" title="HotUpdate">
+                  <i class="fa fa-chevron-left"></i> HotUpdate
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/27/C++%20C%E8%AF%AD%E8%A8%80%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8D%E7%94%A8/" rel="next" title="C++ C语言结构体不用">
+                  C++ C语言结构体不用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Machl</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
