@@ -285,10 +285,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-03-27 13:56:05 / Modified: 15:38:08" itemprop="dateCreated datePublished" datetime="2021-03-27T13:56:05+08:00">2021-03-27</time>
+      <time title="Created: 2021-03-27 15:56:05" itemprop="dateCreated datePublished" datetime="2021-03-27T15:56:05+08:00">2021-03-27</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-29 12:33:48" itemprop="dateModified" datetime="2021-03-29T12:33:48+08:00">2021-03-29</time>
+      </span>
 
   
 </div>
@@ -355,10 +361,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-03-27 11:24:32 / Modified: 13:54:39" itemprop="dateCreated datePublished" datetime="2021-03-27T11:24:32+08:00">2021-03-27</time>
+      <time title="Created: 2021-03-27 13:24:32" itemprop="dateCreated datePublished" datetime="2021-03-27T13:24:32+08:00">2021-03-27</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-29 12:33:50" itemprop="dateModified" datetime="2021-03-29T12:33:50+08:00">2021-03-29</time>
+      </span>
 
   
 </div>
@@ -370,7 +382,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="C-与C语言结构体的区别"><a href="#C-与C语言结构体的区别" class="headerlink" title="C++与C语言结构体的区别"></a>C++与C语言结构体的区别</h1><h2 id="C-可以在结构体中声明函数"><a href="#C-可以在结构体中声明函数" class="headerlink" title="C++可以在结构体中声明函数"></a>C++可以在结构体中声明函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FTest</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Hello</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h1 id="C-与C语言结构体的区别"><a href="#C-与C语言结构体的区别" class="headerlink" title="C++与C语言结构体的区别"></a>C++与C语言结构体的区别</h1><h2 id="C-可以在结构体中声明函数"><a href="#C-可以在结构体中声明函数" class="headerlink" title="C++可以在结构体中声明函数"></a>C++可以在结构体中声明函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FTest</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Hello</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123;&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="C只能在结构体中声明函数指针"><a href="#C只能在结构体中声明函数指针" class="headerlink" title="C只能在结构体中声明函数指针"></a>C只能在结构体中声明函数指针</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdio.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Hello</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FT</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span>(*Hello1)(<span class="keyword">int</span>, <span class="keyword">int</span>);</span><br><span class="line">&#125; FTs;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    FTs.Hello1 = Hello;</span><br><span class="line">    <span class="comment">//将Hello函数赋值给Hello1函数指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
